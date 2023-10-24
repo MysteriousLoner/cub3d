@@ -20,6 +20,11 @@ typedef struct s_parse
 	char	**array;
 }			t_parse;
 
+typedef struct s_cub3d
+{
+	void	*mlx;
+	void	*win;
+}			t_cub3d;
 //mapcheck
 int	mapcheck(char **array, int array_width);
 
