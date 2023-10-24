@@ -8,6 +8,7 @@ int close_window(t_cub3d *game_vars)
     // free_game_vars(game_vars);
     exit(0);
 }
+
 // key_handler
 int     key_handler(int keycode, t_cub3d *game_vars)
 {
@@ -20,12 +21,12 @@ int     key_handler(int keycode, t_cub3d *game_vars)
 //initialize game vars
 void    init_game_vars(t_cub3d *game_vars)
 {
-    // game_vars = malloc(sizeof(t_cub3d));
     game_vars->mlx = mlx_init();
-    game_vars->win = mlx_new_window(game_vars->mlx, 640, 480, "cub3d");
+    game_vars->width = 1920;
+    game_vars->height = 1080;
+    game_vars->win = mlx_new_window(game_vars->mlx, 1920, 1080, "cub3d");
     mlx_hook(game_vars->win, 17, ((1L<<17) | (1L<<19)), close_window, game_vars->mlx);
     mlx_key_hook(game_vars->win, key_handler, game_vars);
-    mlx_loop(game_vars->mlx);
 }
 
 // garbage collector
@@ -39,6 +40,8 @@ int main(int argc, char **argv)
     t_cub3d game_vars;
 
     init_game_vars(&game_vars);
+    for_real_engine(&game_vars);
+    mlx_loop(game_vars.mlx);
     // free_game_vars(game_vars);
     (void)argc;
     (void)argv;

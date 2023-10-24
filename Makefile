@@ -62,6 +62,7 @@ SRCS        :=      main.c \
                           mapcheck.c \
                           gnl/get_next_line.c \
                           gnl/get_next_line_utils.c \
+                          for_real_engine/for_real_engine.c \
                           
 OBJS        := $(SRCS:.c=.o)
 

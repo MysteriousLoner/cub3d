@@ -20,13 +20,24 @@ typedef struct s_parse
 	char	**array;
 }			t_parse;
 
+typedef struct s_player
+{
+	float	x;
+	float	y;
+	float	*view;
+}			t_player;
+
 typedef struct s_cub3d
 {
 	void	*mlx;
 	void	*win;
+	int		width;
+	int		height;
+	char	**map;
 }			t_cub3d;
+
 //mapcheck
 int	mapcheck(char **array, int array_width);
-
+int	for_real_engine(t_cub3d *vars);
 
 #endif
