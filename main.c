@@ -1,46 +1,36 @@
 #include "cub3d.h"
+#include <stdlib.h>
 
-int	main(int argc, char **argv)
+typedef struct s_vars {
+    void *mlx;
+    void *win;
+} t_vars;
+
+//handle keypress
+int close_win(void *param)
 {
-	int		fd;
-	int		i;
-	char	*line;
+    t_vars *vars = (t_vars *)param;
+    mlx_destroy_window(vars->mlx, vars->win);
+    exit(0);
+    return (0);
+}
 
-	fd = open(argv[1], 0);
-	t_parse map;
-	i = 0;
-	while (1)
-	{
-		line = get_next_line(fd);
-		printf("line: %s\n", line);
-		if (line == 0)
-			break;
-		else if (ft_strncmp(line, "NO ", 3) == 0)
-			map.NO = ft_substr(line, 4, ft_strlen(line));
-		else if (ft_strncmp(line, "SO ", 3) == 0)
-			map.SO = ft_substr(line, 4, ft_strlen(line));
-		else if (ft_strncmp(line, "WE ", 3) == 0)
-			map.WE = ft_substr(line, 4, ft_strlen(line));
-		else if (ft_strncmp(line, "EA ", 3) == 0)
-			map.EA = ft_substr(line, 4, ft_strlen(line));
-		else if (ft_strncmp(line, "F ", 2) == 0)
-			map.F = ft_substr(line, 3, ft_strlen(line));
-		else if (ft_strncmp(line, "C ", 2) == 0)
-			map.C = ft_substr(line, 3, ft_strlen(line));
-		else if (line[0] != '\n')
-		{
-			map.array[i] = ft_strdup(line);
-			i++;
-		}
-		free(line);
-	}
-	printf("NO: %s\n", map.NO);
-	printf("SO: %s\n", map.SO);
-	printf("WE: %s\n", map.WE);
-	printf("EA: %s\n", map.EA);
-	printf("F: %s\n", map.F);
-	printf("C: %s\n", map.C);
-	mapcheck(map.array, i - 1);
-	for (int i = 0; i < 14; i++)
-		printf("map: %s", map.array[i]);
+int key_hook(int keycode, void *param)
+{
+    t_vars *vars = (t_vars *)param;
+    printf("keycode: %d\n", keycode);
+    if (keycode == 65307)
+        close_win(vars);
+    return (0);
+}
+int main(void)
+{
+    t_vars vars;
+
+    vars.mlx = mlx_init();
+    vars.win = mlx_new_window(vars.mlx, 1920, 1080, "Hello world!");
+    mlx_hook(vars.win, 33, 0L, close_win, &vars);
+    mlx_key_hook(vars.win, key_hook, &vars);
+    mlx_loop(vars.mlx);
+    return (0);
 }

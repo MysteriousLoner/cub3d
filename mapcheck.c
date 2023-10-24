@@ -1,5 +1,7 @@
 #include "cub3d.h"
 
+#include "cub3d.h"
+
 int	cf_check(char **array, int array_width)
 {
 	int	i;
@@ -26,6 +28,7 @@ int	cf_check(char **array, int array_width)
 		else
 			return (1);
 	}
+	return (0);
 }
 
 int	wordcheck(char **array, int array_width)
@@ -99,9 +102,9 @@ int	fillcheck(char **array, int array_width)
 				if ((array[i - 1][j] == '0' || array[i - 1][j] == '1'
 				|| array[i - 1][j] == 'N' || array[i - 1][j] == 'S'
 				|| array[i - 1][j] == 'E' || array[i - 1][j] == 'W')
-				&& (array[i + 1][j] == '0' || array[i + 1][j] == '1')
+				&& (array[i + 1][j] == '0' || array[i + 1][j] == '1'
 				|| array[i + 1][j] == 'N' || array[i + 1][j] == 'S'
-				|| array[i + 1][j] == 'E' || array[i + 1][j] == 'W')
+				|| array[i + 1][j] == 'E' || array[i + 1][j] == 'W'))
 					j++;
 				else
 					return (1);
@@ -117,6 +120,7 @@ int	mapcheck(char **array, int array_width)
 {
 	if (cf_check(array, array_width) == 1)
 		printf("Error\n");
+	printf("in\n");
 	if (wordcheck(array, array_width) == 1)
 		printf("Error\n");
 	if (sidecheck(array, array_width) == 1)
