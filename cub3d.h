@@ -9,7 +9,14 @@
 
 char	*get_next_line(int fd);
 
-typedef struct s_parse
+typedef struct s_rgb
+{
+	int	r;
+	int	g;
+	int	b;
+}			t_rgb;
+
+typedef struct s_map
 {
 	char	*NO;
 	char	*SO;
@@ -17,27 +24,31 @@ typedef struct s_parse
 	char	*WE;
 	char	*F;
 	char	*C;
-	char	**array;
-}			t_parse;
+	char	**map;
+	t_rgb	*floor;
+	t_rgb	*ceiling;
+}			t_map;
 
 typedef struct s_player
 {
 	float	x;
 	float	y;
 	float	*view;
+	char	start_face;
 }			t_player;
 
 typedef struct s_cub3d
 {
-	void	*mlx;
-	void	*win;
-	int		width;
-	int		height;
-	char	**map;
+	void		*mlx;
+	void		*win;
+	int			width;
+	int			height;
+	t_map		*map;
+	t_player	*player;
 }			t_cub3d;
 
 //mapcheck
-int	mapcheck(char **array, int array_width);
-int	for_real_engine(t_cub3d *vars);
+t_map	*map_check(char *argv, t_cub3d *vars);
+int		for_real_engine(t_cub3d *vars);
 
 #endif

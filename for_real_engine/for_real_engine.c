@@ -16,7 +16,8 @@ void	render_sky(t_cub3d *vars)
 	{
 		while (x < vars->width)
 		{
-			mlx_pixel_put(vars->mlx, vars->win, x, y, rgb_to_int(135, 206, 235));
+			mlx_pixel_put(vars->mlx, vars->win, x, y, rgb_to_int(vars->map->ceiling->r,
+				vars->map->ceiling->g, vars->map->ceiling->b));
 			x++;
 		}
 		x = vars->width * 0.25;
@@ -26,7 +27,8 @@ void	render_sky(t_cub3d *vars)
 	{
 		while (x < vars->width)
 		{
-			mlx_pixel_put(vars->mlx, vars->win, x, y, rgb_to_int(135, 206, 235));
+			mlx_pixel_put(vars->mlx, vars->win, x, y, rgb_to_int(vars->map->ceiling->r,
+				vars->map->ceiling->g, vars->map->ceiling->b));
 			x++;
 		}
 		x = 0;
@@ -45,7 +47,8 @@ void	render_earth(t_cub3d *vars)
 	{
 		while (x < vars->width)
 		{
-			mlx_pixel_put(vars->mlx, vars->win, x, y, rgb_to_int(205, 133, 65));
+			mlx_pixel_put(vars->mlx, vars->win, x, y, rgb_to_int(vars->map->floor->r,
+				vars->map->floor->g, vars->map->floor->b));
 			x++;
 		}
 		x = 0;
