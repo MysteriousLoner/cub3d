@@ -1,19 +1,5 @@
 #include "cub3d.h"
 
-// debugging function that prints map
-void    print_map(char **map)
-{
-    int i;
-
-    i = 0;
-    printf("map: \n");
-    while (map[i])
-    {
-        printf("%s", map[i]);
-        i++;
-    }
-}
-
 // assign path of graphic to struct if valid
 void add_nswe(char **dir, char *line)
 {
@@ -174,6 +160,21 @@ int is_cardinal(char c)
     return (0);
 }
 
+// assign variables to player struct
+void    assign_pvars(int i, int j, char c, t_player *player)
+{
+    player->x = j;
+    player->y = i;
+    if (c == 'N')
+        player->angle = G_PI / 2;
+    if (c == 'S')
+        player->angle = 3 * G_PI / 2;
+    if (c == 'W')
+        player->angle = G_PI;
+    if (c == 'E')
+        player->angle = 0;
+}
+
 // check map for invalid characters and missing or extra sprites
 int map_unclean(char **map, t_cub3d **vars)
 {
@@ -190,9 +191,8 @@ int map_unclean(char **map, t_cub3d **vars)
         {
             if (is_cardinal(map[i][j]))
             {
-                (*vars)->player->x = j;
-                (*vars)->player->y = i;
-                (*vars)->player->start_face = map[i][j];
+                assign_pvars(i, j, map[i][j], (*vars)->player);
+                map[i][j] = '0';
                 p_count++;
             }
             if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != ' '
@@ -275,9 +275,8 @@ int map_valid(t_map *map, t_cub3d *vars)
     char    **tmp;
 
     tmp = dup_2d(map->map);
-    if (map_unclean(tmp, &vars))
+    if (map_unclean(map->map, &vars))
         return (0);
-    printf("player pos; x: %f, y: %f, view: %c\n", vars->player->x, vars->player->y, vars->player->start_face);
     if (map_not_closed(tmp))
         return (0);
     free_2d(tmp);
@@ -304,7 +303,6 @@ int check_map(t_map *map, int fd, t_cub3d *vars)
         free(line);
         line = get_next_line(fd);
     }
-    print_map(map->map);
     if (map_valid(map, vars) == 0)
         return (0);
     return (1);
@@ -328,6 +326,7 @@ t_map *map_check(char *argv, t_cub3d *vars)
     	return (NULL);
     if (!check_map(map, fd, vars))
     	return (NULL);
+    print_map(map->map);
     close(fd);
     return (map);
 }

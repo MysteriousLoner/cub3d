@@ -48,6 +48,8 @@ SRCS        :=      main.c \
                           libft/ft_atoi.c \
                           libft/ft_split.c \
                           mapcheck.c \
+                          movement.c \
+                          debug.c \
                           gnl/get_next_line.c \
                           gnl/get_next_line_utils.c \
                           for_real_engine/for_real_engine.c \

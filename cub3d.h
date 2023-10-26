@@ -5,7 +5,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include <math.h>
 #include "mlx_linux/mlx.h"
+
+#define G_PI 3.14159265358979323846
 
 char	*get_next_line(int fd);
 
@@ -33,8 +36,10 @@ typedef struct s_player
 {
 	float	x;
 	float	y;
+	float	dx;
+	float	dy;
+	float	angle;
 	float	*view;
-	char	start_face;
 }			t_player;
 
 typedef struct s_cub3d
@@ -47,10 +52,13 @@ typedef struct s_cub3d
 	t_player	*player;
 }			t_cub3d;
 
+// debug
+void    print_map(char **map);
+void	print_player(t_player *player);
 //mapcheck
 t_map	*map_check(char *argv, t_cub3d *vars);
-void    print_map(char **map);
-
+// movement
+void	move_player(t_player *player, char key);
 // rendering
 int		for_real_engine(t_cub3d *vars);
 // minimap
