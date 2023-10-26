@@ -216,6 +216,13 @@ int map_unclean(char **map, t_cub3d **vars)
 // check if the zero has space a space around it
 int unclosed_zero(char **map, int i, int j)
 {
+    int mi;
+
+    mi = 0;
+    while (map[mi])
+        mi++;
+    if (i == mi - 1)
+        return (1);
     if (i == 0)
         return (1);
     if (map[i + 1] == 0)
@@ -224,13 +231,13 @@ int unclosed_zero(char **map, int i, int j)
         return (1);
     if (map[i][j + 1] == 0 || map[i][j + 1] == '\n')
         return (1);
-    if (i - 1 > 0 && map[i - 1][j] == ' ')
+    if (i - 1 > 0 && (map[i - 1][j] == ' ' || map[i - 1][j] == '\n' || map[i - 1][j] == 0))
         return (1);
-    if (i + 1 < (int)ft_strlen(map[i]) && map[i + 1][j] == ' ')
+    if (i + 1 < mi && (map[i + 1][j] == ' ' || map[i + 1][j] == '\n' || map[i + 1][j] == 0))
         return (1);
-    if (j - 1 > 0 && map[i][j - 1] == ' ')
+    if (j - 1 > 0 && (map[i][j - 1] == ' ' || map[i][j - 1] == '\n' || map[i][j - 1] == 0))
         return (1);
-    if (j + 1 < (int)ft_strlen(map[i]) && map[i][j + 1] == ' ')
+    if (j + 1 < (int)(ft_strlen(map[i]) - 1) && (map[i][j + 1] == ' ' || map[i][j + 1] == '\n' || map[i][j + 1] == 0))
         return (1);
     return (0);
 }
@@ -321,7 +328,6 @@ t_map *map_check(char *argv, t_cub3d *vars)
     	return (NULL);
     if (!check_map(map, fd, vars))
     	return (NULL);
-    (void)vars;
     close(fd);
     return (map);
 }

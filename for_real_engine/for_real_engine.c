@@ -60,7 +60,7 @@ int	for_real_engine(t_cub3d *vars)
 {
 	render_sky(vars);
 	render_earth(vars);
-	// render_minimap(vars);
+	render_minimap(vars->width * 0.25, vars->height * 0.25, vars, vars->player);
 	// render_player(vars);
 	// render_walls(vars);
 	return (1);
