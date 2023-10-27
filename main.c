@@ -16,13 +16,13 @@ int     key_handler(int keycode, t_cub3d *game_vars)
     if (keycode == 53)
         close_window(game_vars);
     if (keycode == 13) // W
-        move_player(game_vars->player, 'W');
+        move_player(game_vars->player, game_vars->map->map, 'W');
     if (keycode == 0) // A
-        move_player(game_vars->player, 'A');
+        move_player(game_vars->player, game_vars->map->map, 'A');
     if (keycode == 1) // S
-        move_player(game_vars->player, 'S');
+        move_player(game_vars->player, game_vars->map->map, 'S');
     if (keycode == 2) // D
-        move_player(game_vars->player, 'D');
+        move_player(game_vars->player, game_vars->map->map, 'D');
     print_player(game_vars->player);
     return (0);
 }

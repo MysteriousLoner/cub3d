@@ -173,6 +173,8 @@ void    assign_pvars(int i, int j, char c, t_player *player)
         player->angle = G_PI;
     if (c == 'E')
         player->angle = 0;
+    player->dx = cos(player->angle);
+	player->dy = sin(player->angle);
 }
 
 // check map for invalid characters and missing or extra sprites

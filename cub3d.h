@@ -58,7 +58,7 @@ void	print_player(t_player *player);
 //mapcheck
 t_map	*map_check(char *argv, t_cub3d *vars);
 // movement
-void	move_player(t_player *player, char key);
+void	move_player(t_player *player, char **map, char key);
 // rendering
 int		for_real_engine(t_cub3d *vars);
 // minimap
