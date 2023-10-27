@@ -53,6 +53,7 @@ void    print_map(char **map);
 
 // rendering
 int		for_real_engine(t_cub3d *vars);
+int		rgb_to_int(int r, int g, int b);
 // minimap
 void	render_minimap(int width, int height, t_cub3d *vars, t_player *player);
 #endif
