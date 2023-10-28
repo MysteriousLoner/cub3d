@@ -17,5 +17,5 @@ void    print_map(char **map)
 // debugging function that prints player info
 void	print_player(t_player *player)
 {
-	printf("player pos: %f, %f\nplayer delta: %f, %f\nplayer angle: %f\n", player->x, player->y, player->dx, player->dy, player->angle);
+	printf("player pos: %f, %f\nplayer delta: dx: %f, dy: %f\nplayer angle: %f\n", player->x, player->y, player->dx, player->dy, player->angle);
 }

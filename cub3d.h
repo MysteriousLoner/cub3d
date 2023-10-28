@@ -15,6 +15,7 @@
 #define KEY_D 100
 #define KEY_W 119
 #define KEY_ESC 65307
+#define BUTTON_X 33
 #endif
 
 // Macro for Mac
@@ -24,6 +25,7 @@
 #define KEY_D 2
 #define KEY_W 13
 #define KEY_ESC 53
+#define BUTTON_X 17
 #endif
 
 // Universal Macro

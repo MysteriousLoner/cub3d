@@ -31,8 +31,8 @@ int     key_handler(int keycode, t_cub3d *game_vars)
 void    init_game_vars(t_cub3d *game_vars, char *argv )
 {
     game_vars->mlx = mlx_init();
-    game_vars->width = 600;
-    game_vars->height = 600;
+    game_vars->width = WIDTH;
+    game_vars->height = HEIGHT;
     game_vars->player = malloc(sizeof(t_player));
     game_vars->map = map_check(argv, game_vars);
     printf("player start: \n");
@@ -43,7 +43,7 @@ void    init_game_vars(t_cub3d *game_vars, char *argv )
         exit(0);
     }
     game_vars->win = mlx_new_window(game_vars->mlx, game_vars->width, game_vars->height, "cub3d");
-    mlx_hook(game_vars->win, 17, ((1L<<17) | (1L<<19)), close_window, game_vars->mlx);
+    mlx_hook(game_vars->win, BUTTON_X, ((1L<<17) | (1L<<19)), close_window, game_vars);
     mlx_key_hook(game_vars->win, key_handler, game_vars);
 }
 
