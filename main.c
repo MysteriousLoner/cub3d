@@ -13,15 +13,15 @@ int close_window(t_cub3d *game_vars)
 int     key_handler(int keycode, t_cub3d *game_vars)
 {
     printf("keycode: %d\n", keycode);
-    if (keycode == 53)
+    if (keycode == KEY_ESC)
         close_window(game_vars);
-    if (keycode == 13) // W
+    if (keycode == KEY_W) // W
         move_player(game_vars->player, game_vars->map->map, 'W');
-    if (keycode == 0) // A
+    if (keycode == KEY_A) // A
         move_player(game_vars->player, game_vars->map->map, 'A');
-    if (keycode == 1) // S
+    if (keycode == KEY_S) // S
         move_player(game_vars->player, game_vars->map->map, 'S');
-    if (keycode == 2) // D
+    if (keycode == KEY_D) // D
         move_player(game_vars->player, game_vars->map->map, 'D');
     print_player(game_vars->player);
     return (0);

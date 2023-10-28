@@ -8,7 +8,28 @@
 #include <math.h>
 #include "mlx_linux/mlx.h"
 
-#define G_PI 3.14159265358979323846
+// Macro for Linux
+#ifdef __linux__
+#define KEY_A 97
+#define KEY_S 115
+#define KEY_D 100
+#define KEY_W 119
+#define KEY_ESC 65307
+#endif
+
+// Macro for Mac
+#ifdef __APPLE__
+#define KEY_A 0
+#define KEY_S 1
+#define KEY_D 2
+#define KEY_W 13
+#define KEY_ESC 53
+#endif
+
+// Universal Macro
+#define PI 3.14159265358979323846
+#define WIDTH 600
+#define HEIGHT 600
 
 char	*get_next_line(int fd);
 
