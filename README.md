@@ -23,6 +23,7 @@ to start and select the map.
 You can adjust the window size by modifying these values in "cub3d.h"
 
 ```#define WIDTH "any value you want"```
+
 ```#define HEIGHT "any value you want"```
 
 # Finally,
