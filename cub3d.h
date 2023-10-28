@@ -82,6 +82,7 @@ t_map	*map_check(char *argv, t_cub3d *vars);
 void	move_player(t_player *player, char **map, char key);
 // rendering
 int		for_real_engine(t_cub3d *vars);
+int		rgb_to_int(int r, int g, int b);
 // minimap
 void	render_minimap(int width, int height, t_cub3d *vars, t_player *player);
 #endif
