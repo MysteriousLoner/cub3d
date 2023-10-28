@@ -12,11 +12,16 @@ To run the program, navigate to the root directory fo the folder and run:
 
 ```make```
 
-to compile the program and:
+to compile the program and run:
 
 ```./cub3d map.cub```
 
 to start and select the map.
+
+# Customize according to your liking
+
+You can adjust the window size by modifying these values in "cub3d.h"
+```#define WIDTH 600\n#define HEIGHT 600```
 
 # Finally,
 
