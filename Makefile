@@ -54,6 +54,7 @@ SRCS        :=      main.c \
                           gnl/get_next_line_utils.c \
                           for_real_engine/for_real_engine.c \
                           for_real_engine/render_minimap.c \
+                          for_real_engine/render_player.c \
                           
 OBJS        := $(SRCS:.c=.o)
 

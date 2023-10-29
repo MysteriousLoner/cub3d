@@ -165,6 +165,8 @@ void    assign_pvars(int i, int j, char c, t_player *player)
 {
     player->x = j;
     player->y = i;
+    player->px = j;
+    player->py = i;
     if (c == 'S')
         player->angle = PI / 2;
     if (c == 'N')

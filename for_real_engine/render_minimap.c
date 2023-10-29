@@ -35,13 +35,15 @@ void	minimap_put_wall(int size, t_cub3d *vars, int pos_x, int pos_y)
 	x = pos_x * size;
 	y = pos_y * size;
 	i = 0;
+	vars->screen->addr = mlx_get_data_addr(vars->screen->img, &vars->screen->bpp,
+	&vars->screen->line_length, &vars->screen->endian);
 	while (i < size)
 	{
 		j = 0;
 		while (j < size)
 		{
 			if (j != 0 && j != size && i != 0 && i != size)
-				mlx_pixel_put(vars->mlx, vars->win, x + i, y + j, rgb_to_int(255, 255, 255));
+				put_pixel(vars, x + i, y + j, rgb_to_int(255, 255, 255));
 			j++;
 		}
 		i++;
@@ -58,28 +60,25 @@ void	minimap_put_floor(int size, t_cub3d *vars, int pos_x, int pos_y)
 	x = pos_x * size;
 	y = pos_y * size;
 	i = 0;
+	vars->screen->addr = mlx_get_data_addr(vars->screen->img, &vars->screen->bpp,
+	&vars->screen->line_length, &vars->screen->endian);
 	while (i < size)
 	{
 		j = 0;
 		while (j < size)
 		{
 			if (j != 0 && j != size && i != 0 && i != size)
-				mlx_pixel_put(vars->mlx, vars->win, x + i, y + j, rgb_to_int(128, 128, 128));
+				put_pixel(vars, x + i, y + j, rgb_to_int(128, 128, 128));
 			else
-				mlx_pixel_put(vars->mlx, vars->win, x + i, y + j, rgb_to_int(0, 0, 0));
+				put_pixel(vars, x + i, y + j, rgb_to_int(0, 0, 0));
 			j++;
 		}
 		i++;
 	}
 }
 
-void	render_minimap(int width, int height, t_cub3d *vars, t_player *player)
+void	init_minimap(int width, int height, t_cub3d *vars)
 {
-	printf("\nrendering minimap\n");
-	printf("width: %d\n", width);
-	printf("height: %d\n", height);
-	printf("player x: %f\n", player->x);
-	printf("player y: %f\n", player->y);
 	int	i;
 	int	j;
 	int	size;

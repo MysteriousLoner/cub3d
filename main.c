@@ -23,7 +23,8 @@ int     key_handler(int keycode, t_cub3d *game_vars)
         move_player(game_vars->player, game_vars->map->map, 'S');
     if (keycode == KEY_D) // D
         move_player(game_vars->player, game_vars->map->map, 'D');
-    print_player(game_vars->player);
+    for_real_engine(game_vars);
+    // init_graphics(game_vars);
     return (0);
 }
 
@@ -60,7 +61,8 @@ int main(int argc, char **argv)
     if (argc != 2)
         return (0);
     init_game_vars(&game_vars, argv[1]);
-    for_real_engine(&game_vars);
+    init_graphics(&game_vars);
+    // for_real_engine(&game_vars);
     mlx_loop(game_vars.mlx);
     // free_game_vars(game_vars);
     (void)argc;

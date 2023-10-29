@@ -18,4 +18,5 @@ void    print_map(char **map)
 void	print_player(t_player *player)
 {
 	printf("player pos: %f, %f\nplayer delta: dx: %f, dy: %f\nplayer angle: %f\n", player->x, player->y, player->dx, player->dy, player->angle);
+    printf("player px: %f, py: %f\n", player->px, player->py);
 }
