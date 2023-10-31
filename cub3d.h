@@ -63,8 +63,7 @@ typedef struct s_player
 	float	dy;
 	float	angle;
 	float	*view;
-	float	px;
-	float	py;
+	float	c_pos;
 }			t_player;
 
 typedef struct s_image

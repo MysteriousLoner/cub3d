@@ -165,8 +165,6 @@ void    assign_pvars(int i, int j, char c, t_player *player)
 {
     player->x = j;
     player->y = i;
-    player->px = j;
-    player->py = i;
     if (c == 'S')
         player->angle = PI / 2;
     if (c == 'N')
@@ -175,8 +173,8 @@ void    assign_pvars(int i, int j, char c, t_player *player)
         player->angle = PI;
     if (c == 'W')
         player->angle = 0;
+    player->dy = sin(player->angle);
     player->dx = cos(player->angle);
-	player->dy = sin(player->angle);
 }
 
 // check map for invalid characters and missing or extra sprites
@@ -330,7 +328,6 @@ t_map *map_check(char *argv, t_cub3d *vars)
     	return (NULL);
     if (!check_map(map, fd, vars))
     	return (NULL);
-    print_map(map->map);
     close(fd);
     return (map);
 }

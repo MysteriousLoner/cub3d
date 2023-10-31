@@ -36,8 +36,6 @@ void    init_game_vars(t_cub3d *game_vars, char *argv )
     game_vars->height = HEIGHT;
     game_vars->player = malloc(sizeof(t_player));
     game_vars->map = map_check(argv, game_vars);
-    printf("player start: \n");
-    print_player(game_vars->player);
     if (game_vars->map == NULL)
     {
         printf("MAP ERROR!\n");

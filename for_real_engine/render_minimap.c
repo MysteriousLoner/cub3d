@@ -37,13 +37,15 @@ void	minimap_put_wall(int size, t_cub3d *vars, int pos_x, int pos_y)
 	i = 0;
 	vars->screen->addr = mlx_get_data_addr(vars->screen->img, &vars->screen->bpp,
 	&vars->screen->line_length, &vars->screen->endian);
-	while (i < size)
+	while (i <= size)
 	{
 		j = 0;
-		while (j < size)
+		while (j <= size)
 		{
 			if (j != 0 && j != size && i != 0 && i != size)
 				put_pixel(vars, x + i, y + j, rgb_to_int(255, 255, 255));
+			else
+				put_pixel(vars, x + i, y + j, rgb_to_int(0, 0, 0));
 			j++;
 		}
 		i++;
@@ -62,10 +64,10 @@ void	minimap_put_floor(int size, t_cub3d *vars, int pos_x, int pos_y)
 	i = 0;
 	vars->screen->addr = mlx_get_data_addr(vars->screen->img, &vars->screen->bpp,
 	&vars->screen->line_length, &vars->screen->endian);
-	while (i < size)
+	while (i <= size)
 	{
 		j = 0;
-		while (j < size)
+		while (j <= size)
 		{
 			if (j != 0 && j != size && i != 0 && i != size)
 				put_pixel(vars, x + i, y + j, rgb_to_int(128, 128, 128));
@@ -85,7 +87,7 @@ void	init_minimap(int width, int height, t_cub3d *vars)
 
 	i = 0;
 	size = get_map_size(vars->map->map, width, height);
-	printf("size: %i\n", size);
+	vars->player->c_pos = size / 2;
 	while (vars->map->map[i] != 0)
 	{
 		j = 0;
