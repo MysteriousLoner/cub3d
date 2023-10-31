@@ -82,6 +82,7 @@ typedef struct s_cub3d
 	t_image		*screen;
 	int			width;
 	int			height;
+	int			size;
 	t_map		*map;
 	t_player	*player;
 }			t_cub3d;
@@ -98,7 +99,7 @@ void	put_pixel(t_cub3d *vars, int x, int y, int color);
 void	init_graphics(t_cub3d *vars);
 void	for_real_engine(t_cub3d *vars);
 int		rgb_to_int(int r, int g, int b);
-void	render_player(t_cub3d *vars, int mmap_width, int mmap_height, t_player *player);
+void	render_player(t_cub3d *vars, int size, t_player *player);
 // minimap
 void	init_minimap(int width, int height, t_cub3d *vars);
 #endif
