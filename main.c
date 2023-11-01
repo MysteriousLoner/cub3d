@@ -12,7 +12,6 @@ int close_window(t_cub3d *game_vars)
 // key_handler
 int     key_handler(int keycode, t_cub3d *game_vars)
 {
-    printf("keycode: %d\n", keycode);
     if (keycode == KEY_ESC)
         close_window(game_vars);
     if (keycode == KEY_W) // W

@@ -1,5 +1,44 @@
 #include "../cub3d.h"
 
+
+// Calculate the endpoint of the line based on the player's angle
+void	draw_line(t_cub3d *vars, int size, t_player *player)
+{
+    int		x;
+    int		y;
+    int		i;
+    int		j;
+    float	line_len;
+    float	line_dx;
+    float	line_dy;
+    float	line_width;
+
+    // Calculate the endpoint of the line based on the player's angle
+    i = 0;
+    line_len = size * 0.2 * 4.0;
+    line_dx = line_len * cos(player->angle);
+    line_dy = line_len * sin(player->angle);
+    x = (player->x + 0.5) * size - line_len / 2.0;
+    y = (player->y + 0.5) * size - line_len / 2.0;
+
+    // Calculate the width of the line based on the player's size
+    line_width = size * 0.2 * 0.2;
+
+    // Draw the line as a rectangle with the given width
+    while (i < line_len)
+    {
+        j = 0;
+        while (j < line_width + 1)
+        {
+            put_pixel(vars, x + i * cos(player->angle) - j * sin(player->angle),
+                      y + i * sin(player->angle) + j * cos(player->angle),
+                      rgb_to_int(255, 0, 0));
+            j++;
+        }
+        i++;
+    }
+}
+
 // render the player as a 4x4 square pixel by changing colour of pixels on the minimap
 void	render_player(t_cub3d *vars, int size, t_player *player)
 {
@@ -8,8 +47,8 @@ void	render_player(t_cub3d *vars, int size, t_player *player)
 	int	x;
 	int	y;
 
-	x = player->x * size;
-	y = player->y * size;
+	x = player->x * size - size * 0.1;
+	y = player->y * size - size * 0.1;
 	i = 0;
 	while (i <= size * 0.2)
 	{
@@ -21,13 +60,5 @@ void	render_player(t_cub3d *vars, int size, t_player *player)
 		}
 		i++;
 	}
-	printf("rendering player, these are the variables you need.\n");
-	printf("Use these to calculate the pixel position of the player on the minimap.\n");
-	printf("player->x: %f\nplayer->y: %f\n", player->x, player->y);
-	printf("Use these to calculate the mathmathical position of the player on the minimap.\n");
-	printf("player->c_pos: %f\n", player->c_pos);
-	printf("This is the size of the cube / 2, add it to your calculation to get where to put the pizel.\n");
-	printf("center pixel for the player, x = width / player->posx + player->c_pos\n");
-	printf("center pixel for the player, y = height / player->posy + player->c_pos\n");
-	printf("I think glhf\n");
+    draw_line(vars, size, player);
 }

@@ -35,6 +35,22 @@
 
 char	*get_next_line(int fd);
 
+typedef	struct s_raycasting_vars
+{
+	int		r;
+	int		mx;
+	int		my;
+	int		mp;
+	int		dof;
+	float	rx;
+	float	ry;
+	float	ra;
+	float	xo;
+	float	yo;
+	float 	aTan;
+	int		*map;
+}		t_raycasting_vars;
+
 typedef struct s_rgb
 {
 	int	r;
@@ -90,16 +106,24 @@ typedef struct s_cub3d
 // debug
 void    print_map(char **map);
 void	print_player(t_player *player);
+void    print_intmap(int *map);
 //mapcheck
 t_map	*map_check(char *argv, t_cub3d *vars);
 // movement
 void	move_player(t_player *player, char **map, char key);
 // rendering
 void	put_pixel(t_cub3d *vars, int x, int y, int color);
+void 	draw_line_to_point(t_cub3d *vars, float x, float y, t_player *player);
 void	init_graphics(t_cub3d *vars);
 void	for_real_engine(t_cub3d *vars);
 int		rgb_to_int(int r, int g, int b);
 void	render_player(t_cub3d *vars, int size, t_player *player);
 // minimap
 void	init_minimap(int width, int height, t_cub3d *vars);
+// raycasting
+void	draw_rays(t_cub3d *vars, t_player *player);
+// msic
+int	longest_row(char **map);
+int	map_height(char **map);
+int	*map_to_intmap(char	**map, int height, int width);
 #endif

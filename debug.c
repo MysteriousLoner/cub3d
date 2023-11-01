@@ -19,3 +19,17 @@ void	print_player(t_player *player)
 {
 	printf("player pos: %f, %f\nplayer delta: dx: %f, dy: %f\nplayer angle: %f\n", player->x, player->y, player->dx, player->dy, player->angle);
 }
+
+void    print_intmap(int *map)
+{
+    int i;
+
+    i = 0;
+    printf("intmap: \n");
+    while (map[i] != 2)
+    {
+        printf("%i", map[i]);
+        i++;
+    }
+    printf("i: %i\n", i);
+}
