@@ -55,9 +55,12 @@ void	draw_rays(t_cub3d *vars, t_player *player)
 		{
 			ray_vars->mx = (int) ray_vars->rx;
 			ray_vars->my = (int) ray_vars->ry;
-			ray_vars->mp = ray_vars->my * longest_row(vars->map->map) + ray_vars->mx;
-			if (ray_vars->mp < longest_row(vars->map->map) * map_height(vars->map->map) && ray_vars->map[ray_vars->mp] == 1)
+			printf("mx: %d\n", ray_vars->mx);
+			printf("my: %d\n", ray_vars->my);
+			// ray_vars->mp = ray_vars->my * longest_row(vars->map->map) + ray_vars->mx;
+			if (ray_vars->mp < longest_row(vars->map->map) * map_height(vars->map->map) && vars->map->map[ray_vars->my][ray_vars->mx] == '1')
 			{
+				printf("hit wall\n");
 				// ray_vars->hx = ray_vars->rx;
 				// ray_vars->hy = ray_vars->ry;
 				// ray_vars->distH = dist(player->x, player->y, ray_vars->hx, ray_vars->hy);
