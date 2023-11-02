@@ -9,15 +9,15 @@ void	draw_line(t_cub3d *vars, int size, t_player *player)
     int		i;
     int		j;
     float	line_len;
-    float	line_dx;
-    float	line_dy;
+    // float	line_dx;
+    // float	line_dy;
     float	line_width;
 
     // Calculate the endpoint of the line based on the player's angle
     i = 0;
     line_len = size * 0.2 * 4.0;
-    line_dx = line_len * cos(player->angle);
-    line_dy = line_len * sin(player->angle);
+    // line_dx = line_len * cos(player->angle);
+    // line_dy = line_len * sin(player->angle);
     x = (player->x + 0.5) * size - line_len / 2.0;
     y = (player->y + 0.5) * size - line_len / 2.0;
 

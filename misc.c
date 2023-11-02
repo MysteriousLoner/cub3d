@@ -31,33 +31,29 @@ int	map_height(char **map)
 	return (i);
 }
 
-int	*map_to_intmap(char	**map, int height, int width)
-{
-	int	*intmap;
-	int	i;
-	int	j;
-	int	k;
+void printIntArray(int *array, int rows, int cols) {
+  for (int i = 0; i < rows; i++) {
+    for (int j = 0; j < cols; j++) {
+      printf("%d ", array[i * cols + j]);
+    }
+    printf("\n");
+  }
+}
 
-	intmap = malloc(sizeof(int) * height * width);
-	i = 0;
-	j = 0;
-	k = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j] != '\n' && map[i][j] != '\0')
-		{
-			if (map[i][j] == '1')
-				intmap[k] = 1;
-			else
-				intmap[k] = 0;
-			j++;
-			k++;
-		}
-		i++;
-	}
-	intmap[k] = 2;
-	printf("k: %d\n", k);
-	print_intmap(intmap);
-	return (intmap);
+int *map_to_intmap(char **map, int rows, int cols) {
+  // Allocate memory for the int * array.
+  int *intArray = (int *)malloc(rows * cols * sizeof(int));
+
+  // Iterate over the char ** map and convert each character to an int, replacing spaces and \n with 0.
+  for (int i = 0; i < rows; i++) {
+    for (int j = 0; j < cols; j++) {
+      if (map[i][j] == ' ' || map[i][j] == '\n') {
+        intArray[i * cols + j] = 0;
+      } else {
+        intArray[i * cols + j] = map[i][j] - '0';
+      }
+    }
+  }
+	// printIntArray(intArray, rows, cols);
+  return intArray;
 }

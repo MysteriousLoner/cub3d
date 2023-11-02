@@ -13,33 +13,21 @@ void	put_pixel(t_cub3d *vars, int x, int y, int color)
 
 void draw_line_to_point(t_cub3d *vars, float x, float y, t_player *player)
 {
-	printf("draw_line_to_point\n");
-    int x0 = player->x * vars->width;
-    int y0 = player->y * vars->height;
-    int x1 = x * vars->width;
-    int y1 = y * vars->height;
+	int	i;
+	int j;
 
-    int dx = abs(x1 - x0);
-    int dy = abs(y1 - y0);
-    int sx = x0 < x1 ? 1 : -1;
-    int sy = y0 < y1 ? 1 : -1;
-    int err = dx - dy;
-
-    while (x0 != x1 || y0 != y1)
-    {
-        put_pixel(vars, x0, y0, rgb_to_int(255, 0, 0));
-        int e2 = 2 * err;
-        if (e2 > -dy)
-        {
-            err -= dy;
-            x0 += sx;
-        }
-        if (e2 < dx)
-        {
-            err += dx;
-            y0 += sy;
-        }
-    }
+	// printf("drawing line\n");
+	// printf("x: %f\n", x);
+	// printf("y: %f\n", y);
+	i = 0;
+	j = (sqrt(pow(fabs(player->x - x), 2) + pow(fabs(player->y - y), 2))) * vars->size;
+	printf("sqrt(pow(fabs(player->x - x), 2) + pow(fabs(player->y - y), 2)): %f\n", (sqrt(pow(fabs(player->x - x), 2) + pow(fabs(player->y - y), 2))) * vars->size);
+	while (i < j)
+	{
+		put_pixel(vars, (player->x * vars->size + i * cos(player->angle)), (player->y * vars->size + i * sin(player->angle)), rgb_to_int(255, 0, 0));
+		i++;
+	}
+	// printf("done drawing line\n");
 }
 
 void	init_sky(t_cub3d *vars)

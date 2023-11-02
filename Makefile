@@ -1,6 +1,6 @@
 NAME        := cub3d
 CC        := gcc
-FLAGS    := -Wall -Wextra -Werror
+CFLAGS    := -Wall -Wextra -Werror -fsanitize=address -g3
 
 SRCS        :=      main.c \
                           libft/ft_memcpy.c \
@@ -87,7 +87,7 @@ $(NAME): ${OBJS}
 			@echo "$(GREEN)Linux compilation ${CLR_RMV}of ${YELLOW}$(NAME) ${CLR_RMV}..."
 			@chmod 777 mlx_linux/configure
 			@ $(MAKE) -C mlx_linux all
-			$(CC) $(CFLAGS) -g3 -o $(NAME) $(OBJS) -Imlx_linux -Lmlx_linux -lmlx -lmlx_Linux -L/usr/lib -lXext -lX11 -lm
+		)	$(CC) $(CFLAGS) -g3 -o $(NAME) $(OBJS -Imlx_linux -Lmlx_linux -lmlx -lmlx_Linux -L/usr/lib -lXext -lX11 -lm
 			@echo "$(GREEN)$(NAME) created[0m ✔️"
 endif
 

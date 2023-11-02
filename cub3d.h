@@ -29,7 +29,9 @@
 #endif
 
 // Universal Macro
-#define PI 3.14159265358979323846
+#define PI 3.141592
+#define P2 1.570796
+#define P3 4.712388
 #define WIDTH 1200
 #define HEIGHT 800
 
@@ -48,6 +50,13 @@ typedef	struct s_raycasting_vars
 	float	xo;
 	float	yo;
 	float 	aTan;
+	float 	nTan;
+	float 	hx;
+	float 	hy;
+	float 	distH;
+	float 	distV;
+	float 	vx;
+	float 	vy;
 	int		*map;
 }		t_raycasting_vars;
 
@@ -80,6 +89,7 @@ typedef struct s_player
 	float	angle;
 	float	*view;
 	float	c_pos;
+	float	rc_angle;
 }			t_player;
 
 typedef struct s_image
@@ -106,7 +116,7 @@ typedef struct s_cub3d
 // debug
 void    print_map(char **map);
 void	print_player(t_player *player);
-void    print_intmap(int *map);
+void    print_intmap(int *map, int width, int height);
 //mapcheck
 t_map	*map_check(char *argv, t_cub3d *vars);
 // movement

@@ -83,7 +83,6 @@ void	init_minimap(int width, int height, t_cub3d *vars)
 
 	i = 0;
 	size = get_map_size(vars->map->map, width, height);
-	printf("size: %d\n", size);
 	if (size % 2 == 0)
 		size++;
 	vars->size = size;
