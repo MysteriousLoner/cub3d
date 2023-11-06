@@ -2,7 +2,7 @@
 
 
 // Calculate the endpoint of the line based on the player's angle
-void	draw_line(t_cub3d *vars, int size, t_player *player)
+void	draw_line(t_cub3d *vars, int size, t_player *player, float angle)
 {
     int		x;
     int		y;
@@ -30,8 +30,8 @@ void	draw_line(t_cub3d *vars, int size, t_player *player)
         j = 0;
         while (j < line_width + 1)
         {
-            put_pixel(vars, x + i * cos(player->angle) - j * sin(player->angle),
-                      y + i * sin(player->angle) + j * cos(player->angle),
+            put_pixel(vars, x + i * cos(angle) - j * sin(angle),
+                      y + i * sin(angle) + j * cos(angle),
                       rgb_to_int(255, 0, 0));
             j++;
         }
@@ -60,5 +60,5 @@ void	render_player(t_cub3d *vars, int size, t_player *player)
 		}
 		i++;
 	}
-    draw_line(vars, size, player);
+    draw_line(vars, size, player, player->angle);
 }

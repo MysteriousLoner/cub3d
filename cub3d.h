@@ -32,6 +32,7 @@
 #define PI 3.141592
 #define P2 1.570796
 #define P3 4.712388
+#define DG 0.017452
 #define WIDTH 1200
 #define HEIGHT 800
 
@@ -57,7 +58,7 @@ typedef	struct s_raycasting_vars
 	float 	distV;
 	float 	vx;
 	float 	vy;
-	int		*map;
+	float 	ca;
 }		t_raycasting_vars;
 
 typedef struct s_rgb
@@ -90,6 +91,7 @@ typedef struct s_player
 	float	*view;
 	float	c_pos;
 	float	rc_angle;
+	float	lov;
 }			t_player;
 
 typedef struct s_image
@@ -123,11 +125,12 @@ t_map	*map_check(char *argv, t_cub3d *vars);
 void	move_player(t_player *player, char **map, char key);
 // rendering
 void	put_pixel(t_cub3d *vars, int x, int y, int color);
-void 	draw_line_to_point(t_cub3d *vars, float x, float y, t_player *player);
 void	init_graphics(t_cub3d *vars);
 void	for_real_engine(t_cub3d *vars);
 int		rgb_to_int(int r, int g, int b);
 void	render_player(t_cub3d *vars, int size, t_player *player);
+void draw_line_to_point(t_cub3d *vars, float x, float y, t_player *player);
+void	draw_walls(t_cub3d *vars, int r, float dist, int color);
 // minimap
 void	init_minimap(int width, int height, t_cub3d *vars);
 // raycasting
@@ -135,5 +138,4 @@ void	draw_rays(t_cub3d *vars, t_player *player);
 // msic
 int	longest_row(char **map);
 int	map_height(char **map);
-int	*map_to_intmap(char	**map, int height, int width);
 #endif

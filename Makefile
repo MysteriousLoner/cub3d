@@ -56,6 +56,7 @@ SRCS        :=      main.c \
                           for_real_engine/render_minimap.c \
                           for_real_engine/render_player.c \
                           for_real_engine/raycasting.c \
+                          for_real_engine/render_walls.c \
                           misc.c \
                           
 OBJS        := $(SRCS:.c=.o)

@@ -24,7 +24,7 @@ void draw_line_to_point(t_cub3d *vars, float x, float y, t_player *player)
 	// printf("sqrt(pow(fabs(player->x - x), 2) + pow(fabs(player->y - y), 2)): %f\n", (sqrt(pow(fabs(player->x - x), 2) + pow(fabs(player->y - y), 2))) * vars->size);
 	while (i < j)
 	{
-		put_pixel(vars, (player->x * vars->size + i * cos(player->angle)), (player->y * vars->size + i * sin(player->angle)), rgb_to_int(255, 0, 0));
+		put_pixel(vars, (player->x * vars->size + i * cos(player->lov)), (player->y * vars->size + i * sin(player->lov)), rgb_to_int(255, 0, 0));
 		i++;
 	}
 	// printf("done drawing line\n");
@@ -83,9 +83,9 @@ void	init_graphics(t_cub3d *vars)
 	init_screen(vars);
 	init_sky(vars);
 	init_earth(vars);
+	draw_rays(vars, vars->player);
 	init_minimap(vars->width * 0.40, vars->height * 0.40, vars);
 	render_player(vars, vars->size, vars->player);
-	draw_rays(vars, vars->player);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->screen->img, 0, 0);
 	// render_walls(vars);
 }
