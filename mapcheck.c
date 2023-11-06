@@ -163,18 +163,18 @@ int is_cardinal(char c)
 // assign variables to player struct
 void    assign_pvars(int i, int j, char c, t_player *player)
 {
-    player->x = j;
-    player->y = i;
+    player->x = j + 0.5;
+    player->y = i + 0.5;
     if (c == 'S')
         player->angle = PI / 2;
     if (c == 'N')
         player->angle = 3 * PI / 2;
     if (c == 'E')
-        player->angle = PI;
-    if (c == 'W')
         player->angle = 0;
-    player->dy = sin(player->angle);
-    player->dx = cos(player->angle);
+    if (c == 'W')
+        player->angle = PI;
+    player->dy = sin(player->angle) * 0.2;
+    player->dx = cos(player->angle) * 0.2;
 }
 
 // check map for invalid characters and missing or extra sprites

@@ -7,10 +7,22 @@ int		rgb_to_int(int r, int g, int b)
 
 void	put_pixel(t_cub3d *vars, int x, int y, int color)
 {
-	// vars->screen->addr = mlx_get_data_addr(vars->screen->img, &vars->screen->bpp,
-	// 	&vars->screen->line_length, &vars->screen->endian);
 	*(unsigned int *)(vars->screen->addr +
 		(y * vars->screen->line_length + x * (vars->screen->bpp / 8))) = color;
+}
+
+void draw_line_to_point(t_cub3d *vars, float x, float y, t_player *player)
+{
+	int	i;
+	int j;
+
+	i = 0;
+	j = (sqrt(pow(fabs(player->x - x), 2) + pow(fabs(player->y - y), 2))) * vars->size;
+	while (i < j)
+	{
+		put_pixel(vars, (player->x * vars->size + i * cos(player->lov)), (player->y * vars->size + i * sin(player->lov)), rgb_to_int(255, 0, 0));
+		i++;
+	}
 }
 
 void	init_sky(t_cub3d *vars)
@@ -31,17 +43,6 @@ void	init_sky(t_cub3d *vars)
 		x = 0;
 		y++;
 	}
-	// while (y < vars->height / 2)
-	// {
-	// 	while (x < vars->width)
-	// 	{
-	// 		put_pixel(vars, x, y, rgb_to_int(vars->map->ceiling->r,
-	// 			vars->map->ceiling->g, vars->map->ceiling->b));
-	// 		x++;
-	// 	}
-	// 	x = 0;
-	// 	y++;
-	// }
 }
 
 void	init_earth(t_cub3d *vars)
@@ -72,20 +73,34 @@ void	init_screen(t_cub3d *vars)
 		&vars->screen->line_length, &vars->screen->endian);
 }
 
+void	init_mc(t_cub3d *vars)
+{
+    vars->mc = (t_image *)malloc(sizeof(t_image));
+    
+    vars->mc->img = mlx_xpm_file_to_image(vars->mlx, vars->mc_path, &vars->mc->width, &vars->mc->height);
+    
+    if (vars->mc->img)
+    {
+        vars->mc->addr = mlx_get_data_addr(vars->mc->img, &vars->mc->bpp, &vars->mc->line_length, &vars->mc->endian);
+    }
+}
+
 void	init_graphics(t_cub3d *vars)
 {
 	init_screen(vars);
+	init_mc(vars);
 	init_sky(vars);
 	init_earth(vars);
+	draw_rays(vars, vars->player);
 	init_minimap(vars->width * 0.40, vars->height * 0.40, vars);
-	render_player(vars, vars->width * 0.40, vars->height * 0.40, vars->player);
+	render_player(vars, vars->size, vars->player);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->screen->img, 0, 0);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->mc->img, vars->width * 0.30, vars->height - 400);
 	// render_walls(vars);
 }
 
 void	for_real_engine(t_cub3d *vars)
 {
-	printf("for_real_engine\n");
 	init_graphics(vars);
 	// print_player(vars->player);
 	// render_player(vars, vars->width * 0.40, vars->height * 0.40, vars->player);

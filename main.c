@@ -9,10 +9,31 @@ int close_window(t_cub3d *game_vars)
     exit(0);
 }
 
+// returns one of the few strings based on a random number roll
+char *roll()
+{
+    int roll;
+
+    roll = (rand() % 5) + 1;
+    printf("%d\n", roll);
+    if (roll == 1)
+        return (ft_strdup("Bitch yo better start strippin' before I make you!\n"));
+    if (roll == 2)
+        return (ft_strdup("Nigga you wan some of these?\n"));
+    if (roll == 3)
+        return (ft_strdup("NIGGA yo better be cappin'!\n"));
+    if (roll == 4)
+        return (ft_strdup("Yo NIGGA we have a problem here?\n"));
+    if (roll == 5)
+        return (ft_strdup("NIGGA yiu wanna fuck with  me? \n"));
+    else
+        return("ft_strdup(Me speechless yo\n");
+}
+
 // key_handler
 int     key_handler(int keycode, t_cub3d *game_vars)
 {
-    printf("keycode: %d\n", keycode);
+
     if (keycode == KEY_ESC)
         close_window(game_vars);
     if (keycode == KEY_W) // W
@@ -23,7 +44,23 @@ int     key_handler(int keycode, t_cub3d *game_vars)
         move_player(game_vars->player, game_vars->map->map, 'S');
     if (keycode == KEY_D) // D
         move_player(game_vars->player, game_vars->map->map, 'D');
+    if (keycode == KEY_SPACE)
+    {
+        if (ft_strncmp(game_vars->mc_path, "mc/mc2.xpm", 10) == 0)
+        {
+            game_vars->mc_path = ft_strdup("mc/mc.xpm");
+            game_vars->bs = roll();
+            game_vars->bsf = 1;
+        }
+        else
+        {
+            game_vars->mc_path = ft_strdup("mc/mc2.xpm");
+            game_vars->bsf = 0;
+        }
+    }
     for_real_engine(game_vars);
+    if (game_vars->bsf)
+        mlx_string_put(game_vars->mlx, game_vars->win, WIDTH / 2 - 50, HEIGHT / 2, 0x000000, game_vars->bs);
     // init_graphics(game_vars);
     return (0);
 }
@@ -35,7 +72,10 @@ void    init_game_vars(t_cub3d *game_vars, char *argv )
     game_vars->width = WIDTH;
     game_vars->height = HEIGHT;
     game_vars->player = malloc(sizeof(t_player));
+    game_vars->bs = 0;
+    game_vars->bsf = 0;
     game_vars->map = map_check(argv, game_vars);
+    game_vars->mc_path = ft_strdup("mc/mc2.xpm");
     if (game_vars->map == NULL)
     {
         printf("MAP ERROR!\n");

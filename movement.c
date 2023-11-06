@@ -35,8 +35,8 @@ void	move_player(t_player *player, char **map, char key)
 		if (player->angle > 2 * PI)
 			player->angle -= 2 * PI;
 	}
-	player->dx = cos(player->angle) * 0.5;
-	player->dy = sin(player->angle) * 0.5;
+	player->dx = cos(player->angle) * 0.2;
+	player->dy = sin(player->angle) * 0.2;
 	if (key == 'W' && can_move(player, map, '+'))
 	{
 		player->x += player->dx;
