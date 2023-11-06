@@ -30,3 +30,19 @@ int	map_height(char **map)
 		i++;
 	return (i - 1);
 }
+
+int	longest_d(char **map)
+{
+	int	max;
+	int	i;
+
+	i = 0;
+	max = map_height(map);
+	while(map[i])
+	{
+		if ((int)ft_strlen(map[i]) - 1 > max)
+			max = ft_strlen(map[i]) - 1;
+		i++;
+	}
+	return (max);
+}

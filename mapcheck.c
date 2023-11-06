@@ -170,9 +170,9 @@ void    assign_pvars(int i, int j, char c, t_player *player)
     if (c == 'N')
         player->angle = 3 * PI / 2;
     if (c == 'E')
-        player->angle = PI;
-    if (c == 'W')
         player->angle = 0;
+    if (c == 'W')
+        player->angle = PI;
     player->dy = sin(player->angle) * 0.2;
     player->dx = cos(player->angle) * 0.2;
 }

@@ -36,22 +36,22 @@ void	check_horizontal(t_raycasting_vars *ray_vars, t_cub3d *vars, t_player *play
 	{
 		ray_vars->rx = player->x;
 		ray_vars->ry = player->y;
-		ray_vars->dof = 8;
+		ray_vars->dof = longest_d(vars->map->map);
 	}
-	while (ray_vars->dof < 8)
+	while (ray_vars->dof < longest_d(vars->map->map))
 	{
 		ray_vars->mx = (int) ray_vars->rx >> 0;
 		ray_vars->my = (int) ray_vars->ry >> 0 ;
 		if (ray_vars->mx < 0 || ray_vars->my < 0 || ray_vars->mx > longest_row(vars->map->map) || ray_vars->my > map_height(vars->map->map))
 		{
-			ray_vars->dof = 8;
+			ray_vars->dof = longest_d(vars->map->map);
 		}
-		else if (vars->map->map[ray_vars->my][ray_vars->mx] == '1')
+		if (ray_vars->dof < longest_d(vars->map->map) && vars->map->map[ray_vars->my][ray_vars->mx] == '1')
 		{
 			ray_vars->hx = ray_vars->rx;
 			ray_vars->hy = ray_vars->ry;
 			ray_vars->distH = dist(player->x, player->y, ray_vars->hx, ray_vars->hy);
-			ray_vars->dof = 8;
+			ray_vars->dof = longest_d(vars->map->map);
 		}
 		else
 		{
@@ -80,26 +80,26 @@ void	check_vertical(t_raycasting_vars *ray_vars, t_cub3d *vars, t_player *player
 		ray_vars->xo = 1; //x
 		ray_vars->yo = -ray_vars->xo * ray_vars->nTan;
 	}
-	if (ray_vars->ra == 0 || ray_vars->ra == PI)
+	if (ray_vars->ra == PI / 2 || ray_vars->ra == 3 * PI / 2)
 	{
 		ray_vars->rx = player->x;
 		ray_vars->ry = player->y;
-		ray_vars->dof = 8;
+		ray_vars->dof = longest_d(vars->map->map);
 	}
-	while (ray_vars->dof < 8)
+	while (ray_vars->dof < longest_d(vars->map->map))
 	{
 		ray_vars->mx = (int) ray_vars->rx >> 0;
 		ray_vars->my = (int) ray_vars->ry >> 0 ;
 		if (ray_vars->mx < 0 || ray_vars->my < 0 || ray_vars->my >= map_height(vars->map->map) || ray_vars->mx >= longest_row(vars->map->map))
 		{
-			ray_vars->dof = 8;
+			ray_vars->dof = longest_d(vars->map->map);
 		}
 		else if (vars->map->map[ray_vars->my][ray_vars->mx] == '1')
 		{
 			ray_vars->vx = ray_vars->rx;
 			ray_vars->vy = ray_vars->ry;
 			ray_vars->distV = dist(player->x, player->y, ray_vars->vx, ray_vars->vy);
-			ray_vars->dof = 8;
+			ray_vars->dof = longest_d(vars->map->map);
 		}
 		else
 		{
@@ -118,6 +118,7 @@ void	draw_rays(t_cub3d *vars, t_player *player)
 	flag = 0;
 	ray_vars = malloc(sizeof(t_raycasting_vars));
 	ray_vars->ra = norm_angle(player->angle - DG * 30);
+	// ray_vars->ra = norm_angle(player->angle);
 	ray_vars->r = 0;
 	while (ray_vars->r < 60)
 	{
@@ -129,6 +130,8 @@ void	draw_rays(t_cub3d *vars, t_player *player)
 		ray_vars->vy = player->y;
 		check_horizontal(ray_vars, vars, player);
 		check_vertical(ray_vars, vars, player);
+		printf("distH: %f\n", ray_vars->distH);
+		printf("distV: %f\n", ray_vars->distV);
 		if (ray_vars->distH < ray_vars->distV)
 		{
 			ray_vars->rx = ray_vars->hx;
@@ -141,6 +144,8 @@ void	draw_rays(t_cub3d *vars, t_player *player)
 			ray_vars->ry = ray_vars->vy;
 			draw_walls(vars, ray_vars->r, ray_vars->distV * cos(norm_angle(player->angle - ray_vars->ra)), 200);
 		}
+		if (ray_vars->distV > 10000000000 - 1 && ray_vars->distH > 10000000000 - 1)
+			draw_walls(vars, ray_vars->r, ray_vars->distV * cos(norm_angle(player->angle - ray_vars->ra)), 20);
 		player->lov = ray_vars->ra;
 		draw_line_to_point(vars, ray_vars->rx, ray_vars->ry, player);
 		ray_vars->r++;

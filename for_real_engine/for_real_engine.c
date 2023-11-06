@@ -16,18 +16,13 @@ void draw_line_to_point(t_cub3d *vars, float x, float y, t_player *player)
 	int	i;
 	int j;
 
-	// printf("drawing line\n");
-	// printf("x: %f\n", x);
-	// printf("y: %f\n", y);
 	i = 0;
 	j = (sqrt(pow(fabs(player->x - x), 2) + pow(fabs(player->y - y), 2))) * vars->size;
-	// printf("sqrt(pow(fabs(player->x - x), 2) + pow(fabs(player->y - y), 2)): %f\n", (sqrt(pow(fabs(player->x - x), 2) + pow(fabs(player->y - y), 2))) * vars->size);
 	while (i < j)
 	{
 		put_pixel(vars, (player->x * vars->size + i * cos(player->lov)), (player->y * vars->size + i * sin(player->lov)), rgb_to_int(255, 0, 0));
 		i++;
 	}
-	// printf("done drawing line\n");
 }
 
 void	init_sky(t_cub3d *vars)

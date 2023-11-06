@@ -138,4 +138,5 @@ void	draw_rays(t_cub3d *vars, t_player *player);
 // msic
 int	longest_row(char **map);
 int	map_height(char **map);
+int	longest_d(char **map);
 #endif
