@@ -33,14 +33,6 @@ char *roll()
 int     key_handler(int keycode, void *game_vars)
 {
     t_cub3d *vars = (t_cub3d *) game_vars;
-    if (vars->key_state[0])
-        move_player(vars->player, vars->map->map, 'W');
-    if (vars->key_state[1])
-        move_player(vars->player, vars->map->map, 'A');
-    if (vars->key_state[2])
-        move_player(vars->player, vars->map->map, 'S');
-    if (vars->key_state[3])
-        move_player(vars->player, vars->map->map, 'D');
     if (keycode == KEY_ESC)
         close_window(game_vars);
     if (keycode == KEY_W) // W
@@ -56,6 +48,14 @@ int     key_handler(int keycode, void *game_vars)
         vars->key_state[3] = 1;
         // move_player(game_vars->player, game_vars->map->map, 'D');
     // for_real_engine(vars);
+    if (vars->key_state[0])
+        move_player(vars->player, vars->map->map, 'W');
+    if (vars->key_state[1])
+        move_player(vars->player, vars->map->map, 'A');
+    if (vars->key_state[2])
+        move_player(vars->player, vars->map->map, 'S');
+    if (vars->key_state[3])
+        move_player(vars->player, vars->map->map, 'D');
     if (keycode == KEY_SPACE)
     {
         if (ft_strncmp(vars->mc_path, "mc/mc2.xpm", 10) == 0)
@@ -72,7 +72,7 @@ int     key_handler(int keycode, void *game_vars)
     }
     for_real_engine(vars);
     if (vars->bsf)
-        mlx_string_put(vars->mlx, vars->win, WIDTH / 2 - 50, HEIGHT / 2, 0x000000, vars->bs);
+        mlx_string_put(vars->mlx, vars->win, WIDTH / 2 - 50, HEIGHT / 2, 0xFF0000, vars->bs);
     // init_graphics(game_vars);
     return (0);
 }
@@ -80,14 +80,6 @@ int     key_handler(int keycode, void *game_vars)
 int    key_release_handler(int keycode, void *game_vars)
 {
     t_cub3d *vars = (t_cub3d *) game_vars;
-    if (vars->key_state[0])
-        move_player(vars->player, vars->map->map, 'W');
-    if (vars->key_state[1])
-        move_player(vars->player, vars->map->map, 'A');
-    if (vars->key_state[2])
-        move_player(vars->player, vars->map->map, 'S');
-    if (vars->key_state[3])
-        move_player(vars->player, vars->map->map, 'D');
     if (keycode == KEY_W)
         vars->key_state[0] = 0;
     if (keycode == KEY_A)
@@ -96,6 +88,17 @@ int    key_release_handler(int keycode, void *game_vars)
         vars->key_state[2] = 0;
     if (keycode == KEY_D)
         vars->key_state[3] = 0;
+    if (vars->key_state[0])
+        move_player(vars->player, vars->map->map, 'W');
+    if (vars->key_state[1])
+        move_player(vars->player, vars->map->map, 'A');
+    if (vars->key_state[2])
+        move_player(vars->player, vars->map->map, 'S');
+    if (vars->key_state[3])
+        move_player(vars->player, vars->map->map, 'D');
+        for_real_engine(vars);
+    if (vars->bsf)
+        mlx_string_put(vars->mlx, vars->win, WIDTH / 2 - 50, HEIGHT / 2, 0xFF0000, vars->bs);
     return (0);
 }
 //initialize game vars
@@ -109,17 +112,17 @@ void    init_game_vars(t_cub3d *game_vars, char *argv )
     game_vars->player = malloc(sizeof(t_player));
     game_vars->bs = 0;
     game_vars->bsf = 0;
-    game_vars->map = map_check(argv, game_vars);
+    // map_check(argv, game_vars);
     game_vars->mc_path = ft_strdup("mc/mc2.xpm");
+    if (!map_check(argv, game_vars))
+    {
+        printf("MAP ERROR!\n");
+        exit(0);
+    }
     while (i < 4)
     {
         game_vars->key_state[i] = 0;
         i++;
-    }
-    if (game_vars->map == NULL)
-    {
-        printf("MAP ERROR!\n");
-        exit(0);
     }
     game_vars->win = mlx_new_window(game_vars->mlx, game_vars->width, game_vars->height, "cub3d");
     mlx_hook(game_vars->win, 2, 0, key_handler, game_vars);
@@ -141,6 +144,7 @@ int main(int argc, char **argv)
     if (argc != 2)
         return (0);
     init_game_vars(&game_vars, argv[1]);
+    texture_init(&game_vars);
     init_graphics(&game_vars);
     // for_real_engine(&game_vars);
     mlx_loop(game_vars.mlx);

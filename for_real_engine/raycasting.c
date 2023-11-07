@@ -120,7 +120,7 @@ void	draw_rays(t_cub3d *vars, t_player *player)
 	ray_vars->ra = norm_angle(player->angle - DG * 30);
 	// ray_vars->ra = norm_angle(player->angle);
 	ray_vars->r = 0;
-	while (ray_vars->r < 60)
+	while (ray_vars->r < 400)
 	{
 		ray_vars->distH = 10000000000;
 		ray_vars->distV = 10000000000;
@@ -130,29 +130,29 @@ void	draw_rays(t_cub3d *vars, t_player *player)
 		ray_vars->vy = player->y;
 		check_horizontal(ray_vars, vars, player);
 		check_vertical(ray_vars, vars, player);
-		printf("distH: %f, distV: %f\n", ray_vars->distH, ray_vars->distV);
+		// printf("distH: %f, distV: %f\n", ray_vars->distH, ray_vars->distV);
 		if (ray_vars->distH < ray_vars->distV)
 		{
-			printf("H smaller\n");
+			// printf("H smaller\n");
 			ray_vars->rx = ray_vars->hx;
 			ray_vars->ry = ray_vars->hy;
-			draw_walls(vars, ray_vars->r, ray_vars->distH * cos(norm_angle(player->angle - ray_vars->ra)), 255);
+			draw_walls(vars, ray_vars->r, ray_vars->distH * cos(norm_angle(player->angle - ray_vars->ra)));
 		}
 		if (ray_vars->distV < ray_vars->distH)
 		{
-			printf("V smaller\n");
+			// printf("V smaller\n");
 			ray_vars->rx = ray_vars->vx;
 			ray_vars->ry = ray_vars->vy;
-			draw_walls(vars, ray_vars->r, ray_vars->distV * cos(norm_angle(player->angle - ray_vars->ra)), 200);
+			draw_walls(vars, ray_vars->r, ray_vars->distV * cos(norm_angle(player->angle - ray_vars->ra)));
 		}
 		if (ray_vars->distV == 10000000000 && ray_vars->distH == 10000000000)
 		{
-			printf("long\n");
-			draw_walls(vars, ray_vars->r, longest_d(vars->map->map) * cos(norm_angle(player->angle - ray_vars->ra)), 20);
+			// printf("long\n");
+			draw_walls(vars, ray_vars->r, longest_d(vars->map->map) * cos(norm_angle(player->angle - ray_vars->ra)));
 		}
 		player->lov = ray_vars->ra;
 		draw_line_to_point(vars, ray_vars->rx, ray_vars->ry, player);
 		ray_vars->r++;
-		ray_vars->ra = norm_angle(ray_vars->ra + DG);
+		ray_vars->ra = norm_angle(ray_vars->ra + 1.0472 / 400);
 	}
 }

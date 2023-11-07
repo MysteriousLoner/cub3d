@@ -3,12 +3,11 @@
 // assign path of graphic to struct if valid
 void add_nswe(char **dir, char *line)
 {
-    char *tex_path;
-
-    tex_path = line;
-    while (*tex_path != '.')
-        tex_path++;
-    *dir = ft_strdup(tex_path);
+    *dir = ft_substr(line, 3, ft_strlen(line) - 3);
+    // *line ++;
+    // printf("before: %s\n", line);
+    // *line += 4;
+    // printf("line: %s\n", *dir);
 }
 
 // check if the directory of NO SO EA WE is valid
@@ -260,7 +259,6 @@ int map_not_closed(char **map)
             {
                 if (unclosed_zero(map, i, j))
                 {
-                    printf("here\n");
                     return (1);
                 }
             }
@@ -311,23 +309,22 @@ int check_map(t_map *map, int fd, t_cub3d *vars)
 }
 
 // check if the map.cub is valid
-t_map *map_check(char *argv, t_cub3d *vars)
+int    map_check(char *argv, t_cub3d *vars)
 {
     int fd;
-    t_map *map;
 
-    map = (t_map *)malloc(sizeof(t_map));
-    map->NO = NULL;
-    map->SO = NULL;
-    map->EA = NULL;
-    map->WE = NULL;
+    vars->map = (t_map *)malloc(sizeof(t_map));
+    vars->map->NO = NULL;
+    vars->map->SO = NULL;
+    vars->map->EA = NULL;
+    vars->map->WE = NULL;
     fd = open(argv, O_RDONLY);
-    if (!check_graphic(fd, map))
-        return (NULL);
-    if (!check_colour(fd, map))
-    	return (NULL);
-    if (!check_map(map, fd, vars))
-    	return (NULL);
+    if (!check_graphic(fd, vars->map))
+        return (0);
+    if (!check_colour(fd, vars->map))
+        return (0);
+    if (!check_map(vars->map, fd, vars))
+        return (0);
     close(fd);
-    return (map);
+    return (1);
 }

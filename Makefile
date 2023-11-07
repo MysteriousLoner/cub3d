@@ -58,6 +58,7 @@ SRCS        :=      main.c \
                           for_real_engine/raycasting.c \
                           for_real_engine/render_walls.c \
                           misc.c \
+                          for_real_engine/texture_init.c \
                           
 OBJS        := $(SRCS:.c=.o)
 

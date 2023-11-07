@@ -122,6 +122,10 @@ typedef struct s_cub3d
 	int			bsf;
 	int			key_state[4];
 	char		*mc_path;
+	t_image		*n;
+	t_image		*south;
+	t_image		*east;
+	t_image		*west;
 }			t_cub3d;
 
 // debug
@@ -129,7 +133,8 @@ void    print_map(char **map);
 void	print_player(t_player *player);
 void    print_intmap(int *map, int width, int height);
 //mapcheck
-t_map	*map_check(char *argv, t_cub3d *vars);
+int		map_check(char *argv, t_cub3d *vars);
+void	texture_init(t_cub3d *vars);
 // movement
 void	move_player(t_player *player, char **map, char key);
 // rendering
@@ -138,8 +143,8 @@ void	init_graphics(t_cub3d *vars);
 void	for_real_engine(t_cub3d *vars);
 int		rgb_to_int(int r, int g, int b);
 void	render_player(t_cub3d *vars, int size, t_player *player);
-void draw_line_to_point(t_cub3d *vars, float x, float y, t_player *player);
-void	draw_walls(t_cub3d *vars, int r, float dist, int color);
+void	draw_line_to_point(t_cub3d *vars, float x, float y, t_player *player);
+void	draw_walls(t_cub3d *vars, int r, float dist);
 // minimap
 void	init_minimap(int width, int height, t_cub3d *vars);
 // raycasting
@@ -148,4 +153,5 @@ void	draw_rays(t_cub3d *vars, t_player *player);
 int	longest_row(char **map);
 int	map_height(char **map);
 int	longest_d(char **map);
+void	put_texture(t_cub3d *vars);
 #endif

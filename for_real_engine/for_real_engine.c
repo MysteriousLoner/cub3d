@@ -92,10 +92,11 @@ void	init_graphics(t_cub3d *vars)
 	init_sky(vars);
 	init_earth(vars);
 	draw_rays(vars, vars->player);
-	init_minimap(vars->width * 0.40, vars->height * 0.40, vars);
-	render_player(vars, vars->size, vars->player);
+	// init_minimap(vars->width * 0.40, vars->height * 0.40, vars);
+	// render_player(vars, vars->size, vars->player);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->screen->img, 0, 0);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->mc->img, vars->width * 0.30, vars->height - 400);
+	// mlx_put_image_to_window(vars->mlx, vars->win, vars->n->img, 100, 100);
 	// render_walls(vars);
 }
 
