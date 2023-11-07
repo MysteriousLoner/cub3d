@@ -100,8 +100,14 @@ typedef struct s_cub3d
 	int			height;
 	int			size;
 	t_map		*map;
+	t_image		*north;
 	t_player	*player;
 }			t_cub3d;
+
+// typedef struct s_render
+// {
+// 	unsigned int	**color;
+// }
 
 // debug
 void    print_map(char **map);
@@ -118,10 +124,12 @@ void	init_graphics(t_cub3d *vars);
 void	for_real_engine(t_cub3d *vars);
 int		rgb_to_int(int r, int g, int b);
 void	render_player(t_cub3d *vars, int size, t_player *player);
+void	render_wall(char dir, int height, t_cub3d *vars, float sp);
+void	init_screen(t_cub3d *vars);
 // minimap
 void	init_minimap(int width, int height, t_cub3d *vars);
 // raycasting
-void	draw_rays(t_cub3d *vars, t_player *player);
+// void	draw_rays(t_cub3d *vars, t_player *player);
 // msic
 int	longest_row(char **map);
 int	map_height(char **map);

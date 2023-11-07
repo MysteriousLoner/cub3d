@@ -1,6 +1,6 @@
 NAME        := cub3d
 CC        := gcc
-FLAGS    := -Wall -Wextra -Werror
+CFLAGS    := -Wall -Wextra -Werror -fsanitize=address -g3
 
 SRCS        :=      main.c \
                           libft/ft_memcpy.c \
@@ -57,11 +57,12 @@ SRCS        :=      main.c \
                           for_real_engine/render_player.c \
                           for_real_engine/raycasting.c \
                           misc.c \
+                          for_real_engine/render_wall.c \
                           
 OBJS        := $(SRCS:.c=.o)
 
 .c.o:
-	${CC} ${FLAGS} -c $< -o ${<:.c=.o}
+	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 CLR_RMV		:= \033[0m
 RED		    := \033[1;31m

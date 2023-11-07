@@ -23,6 +23,7 @@ int     key_handler(int keycode, t_cub3d *game_vars)
     if (keycode == KEY_D) // D
         move_player(game_vars->player, game_vars->map->map, 'D');
     for_real_engine(game_vars);
+    render_wall('N', 1200, game_vars, 0);
     // init_graphics(game_vars);
     return (0);
 }
@@ -51,6 +52,13 @@ void    free_game_vars(t_cub3d *game_vars)
     free(game_vars);
 }
 
+void    init_texture(t_cub3d *vars)
+{
+    vars->north = malloc(sizeof(t_image));
+	vars->north->addr = mlx_xpm_file_to_image(vars->mlx, vars->map->NO, (int *)400, (int *)400);
+	vars->north->img = mlx_get_data_addr(vars->north->addr, (int *)400, (int *)400, (int *)400);
+}
+
 int main(int argc, char **argv)
 {
     t_cub3d game_vars;
@@ -58,6 +66,7 @@ int main(int argc, char **argv)
     if (argc != 2)
         return (0);
     init_game_vars(&game_vars, argv[1]);
+    init_texture(&game_vars);
     init_graphics(&game_vars);
     // for_real_engine(&game_vars);
     mlx_loop(game_vars.mlx);

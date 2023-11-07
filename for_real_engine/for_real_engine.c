@@ -97,7 +97,8 @@ void	init_graphics(t_cub3d *vars)
 	init_earth(vars);
 	init_minimap(vars->width * 0.40, vars->height * 0.40, vars);
 	render_player(vars, vars->size, vars->player);
-	draw_rays(vars, vars->player);
+	render_wall('n', 213, vars, 1.1);
+	// draw_rays(vars, vars->player);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->screen->img, 0, 0);
 	// render_walls(vars);
 }

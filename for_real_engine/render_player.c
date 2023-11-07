@@ -50,10 +50,10 @@ void	render_player(t_cub3d *vars, int size, t_player *player)
 	x = player->x * size - size * 0.1;
 	y = player->y * size - size * 0.1;
 	i = 0;
-	while (i <= size * 0.2)
+	while (i < size * 0.2)
 	{
 		j = 0;
-		while (j <= size * 0.2)
+		while (j < size * 0.2)
 		{
 			put_pixel(vars, x + i, y + j, rgb_to_int(255, 255, 255));
 			j++;
