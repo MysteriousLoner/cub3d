@@ -6,7 +6,6 @@ int		can_move(t_player *player, char **map, char sign)
 	{
 		if (map[(int)(player->y + player->dy)][(int)(player->x + player->dx)] == '1')
 		{
-			printf("WALL!\n");
 			return (0);
 		}
 	}
@@ -14,7 +13,6 @@ int		can_move(t_player *player, char **map, char sign)
 	{
 		if (map[(int)(player->y - player->dy)][(int)(player->x - player->dx)] == '1')
 		{
-			printf("WALL!\n");
 			return (0);
 		}
 	}
@@ -25,13 +23,13 @@ void	move_player(t_player *player, char **map, char key)
 {
 	if (key == 'A')
 	{
-		player->angle -= 0.1;
+		player->angle -= 0.05;
 		if (player->angle < 0)
 			player->angle += 2 * PI;
 	}
 	if (key == 'D')
 	{
-		player->angle += 0.1;
+		player->angle += 0.05;
 		if (player->angle > 2 * PI)
 			player->angle -= 2 * PI;
 	}

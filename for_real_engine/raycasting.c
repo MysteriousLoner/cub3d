@@ -20,7 +20,7 @@ void	check_horizontal(t_raycasting_vars *ray_vars, t_cub3d *vars, t_player *play
 	ray_vars->aTan = -1 / tan(ray_vars->ra);
 	if (ray_vars->ra > PI)
 	{
-		ray_vars->ry = (int) player->y - 0.1;
+		ray_vars->ry = (int) player->y - 0.0001;
 		ray_vars->rx = (player->y - ray_vars->ry) * ray_vars->aTan + player->x;
 		ray_vars->yo = -1; //x
 		ray_vars->xo = -ray_vars->yo * ray_vars->aTan;
@@ -90,7 +90,7 @@ void	check_vertical(t_raycasting_vars *ray_vars, t_cub3d *vars, t_player *player
 	{
 		ray_vars->mx = (int) ray_vars->rx >> 0;
 		ray_vars->my = (int) ray_vars->ry >> 0 ;
-		if (ray_vars->mx < 0 || ray_vars->my < 0 || ray_vars->my >= map_height(vars->map->map) || ray_vars->mx >= longest_row(vars->map->map))
+		if (ray_vars->mx < 0 || ray_vars->my < 0 || ray_vars->my > map_height(vars->map->map) || ray_vars->mx > longest_row(vars->map->map))
 		{
 			ray_vars->dof = longest_d(vars->map->map);
 		}
@@ -130,20 +130,26 @@ void	draw_rays(t_cub3d *vars, t_player *player)
 		ray_vars->vy = player->y;
 		check_horizontal(ray_vars, vars, player);
 		check_vertical(ray_vars, vars, player);
+		printf("distH: %f, distV: %f\n", ray_vars->distH, ray_vars->distV);
 		if (ray_vars->distH < ray_vars->distV)
 		{
+			printf("H smaller\n");
 			ray_vars->rx = ray_vars->hx;
 			ray_vars->ry = ray_vars->hy;
 			draw_walls(vars, ray_vars->r, ray_vars->distH * cos(norm_angle(player->angle - ray_vars->ra)), 255);
 		}
 		if (ray_vars->distV < ray_vars->distH)
 		{
+			printf("V smaller\n");
 			ray_vars->rx = ray_vars->vx;
 			ray_vars->ry = ray_vars->vy;
 			draw_walls(vars, ray_vars->r, ray_vars->distV * cos(norm_angle(player->angle - ray_vars->ra)), 200);
 		}
-		if (ray_vars->distV > 10000000000 - 1 && ray_vars->distH > 10000000000 - 1)
-			draw_walls(vars, ray_vars->r, ray_vars->distV * cos(norm_angle(player->angle - ray_vars->ra)), 20);
+		if (ray_vars->distV == 10000000000 && ray_vars->distH == 10000000000)
+		{
+			printf("long\n");
+			draw_walls(vars, ray_vars->r, longest_d(vars->map->map) * cos(norm_angle(player->angle - ray_vars->ra)), 20);
+		}
 		player->lov = ray_vars->ra;
 		draw_line_to_point(vars, ray_vars->rx, ray_vars->ry, player);
 		ray_vars->r++;

@@ -120,6 +120,7 @@ typedef struct s_cub3d
 	t_image		*mc;
 	char		*bs;
 	int			bsf;
+	int			key_state[4];
 	char		*mc_path;
 }			t_cub3d;
 

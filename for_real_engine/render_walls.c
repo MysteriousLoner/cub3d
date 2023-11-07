@@ -15,7 +15,6 @@ void	draw_walls(t_cub3d *vars, int r, float dist, int color)
 		y = (HEIGHT / 2) - (line_h / 2);
 		while (y < ((HEIGHT / 2) + (line_h / 2)))
 		{
-			// if (x > vars->size * longest_row(vars->map->map))
 			put_pixel(vars, x, y, rgb_to_int(color, 0, 0));
 			y++;
 		}
