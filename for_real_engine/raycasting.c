@@ -120,7 +120,7 @@ void	draw_rays(t_cub3d *vars, t_player *player)
 	ray_vars->ra = norm_angle(player->angle - DG * 30);
 	// ray_vars->ra = norm_angle(player->angle);
 	ray_vars->r = 0;
-	while (ray_vars->r < 60)
+	while (ray_vars->r < 400)
 	{
 		ray_vars->distH = 10000000000;
 		ray_vars->distV = 10000000000;
@@ -153,6 +153,7 @@ void	draw_rays(t_cub3d *vars, t_player *player)
 		player->lov = ray_vars->ra;
 		draw_line_to_point(vars, ray_vars->rx, ray_vars->ry, player);
 		ray_vars->r++;
-		ray_vars->ra = norm_angle(ray_vars->ra + DG);
+		ray_vars->ra = norm_angle(ray_vars->ra + 1.0472 / 400);
 	}
+	printf("ray_vars->r: %d\n", ray_vars->r);
 }

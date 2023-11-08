@@ -9,8 +9,8 @@ void	draw_walls(t_cub3d *vars, int r, float dist, int color)
 	line_h = (HEIGHT / dist);
 	if (line_h > HEIGHT)
 		line_h = HEIGHT;
-	x = r * 20;
-	while (x < ((r + 1) * 20))
+	x = r * 3;
+	while (x < ((r + 1) * 3))
 	{
 		y = (HEIGHT / 2) - (line_h / 2);
 		while (y < ((HEIGHT / 2) + (line_h / 2)))
@@ -20,4 +20,5 @@ void	draw_walls(t_cub3d *vars, int r, float dist, int color)
 		}
 		x++;
 	} 
+	// (void)color;
 }

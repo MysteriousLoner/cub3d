@@ -24,7 +24,7 @@ char *roll()
     if (roll == 4)
         return (ft_strdup("Yo NIGGA we have a problem here?\n"));
     if (roll == 5)
-        return (ft_strdup("NIGGA yiu wanna fuck with  me? \n"));
+        return (ft_strdup("NIGGA you wanna fuck with  me? \n"));
     else
         return("ft_strdup(Me speechless yo\n");
 }
@@ -33,14 +33,6 @@ char *roll()
 int     key_handler(int keycode, void *game_vars)
 {
     t_cub3d *vars = (t_cub3d *) game_vars;
-    if (vars->key_state[0])
-        move_player(vars->player, vars->map->map, 'W');
-    if (vars->key_state[1])
-        move_player(vars->player, vars->map->map, 'A');
-    if (vars->key_state[2])
-        move_player(vars->player, vars->map->map, 'S');
-    if (vars->key_state[3])
-        move_player(vars->player, vars->map->map, 'D');
     if (keycode == KEY_ESC)
         close_window(game_vars);
     if (keycode == KEY_W) // W
@@ -56,6 +48,14 @@ int     key_handler(int keycode, void *game_vars)
         vars->key_state[3] = 1;
         // move_player(game_vars->player, game_vars->map->map, 'D');
     // for_real_engine(vars);
+    if (vars->key_state[0])
+        move_player(vars->player, vars->map->map, 'W');
+    if (vars->key_state[1])
+        move_player(vars->player, vars->map->map, 'A');
+    if (vars->key_state[2])
+        move_player(vars->player, vars->map->map, 'S');
+    if (vars->key_state[3])
+        move_player(vars->player, vars->map->map, 'D');
     if (keycode == KEY_SPACE)
     {
         if (ft_strncmp(vars->mc_path, "mc/mc2.xpm", 10) == 0)
@@ -80,14 +80,6 @@ int     key_handler(int keycode, void *game_vars)
 int    key_release_handler(int keycode, void *game_vars)
 {
     t_cub3d *vars = (t_cub3d *) game_vars;
-    if (vars->key_state[0])
-        move_player(vars->player, vars->map->map, 'W');
-    if (vars->key_state[1])
-        move_player(vars->player, vars->map->map, 'A');
-    if (vars->key_state[2])
-        move_player(vars->player, vars->map->map, 'S');
-    if (vars->key_state[3])
-        move_player(vars->player, vars->map->map, 'D');
     if (keycode == KEY_W)
         vars->key_state[0] = 0;
     if (keycode == KEY_A)
@@ -96,6 +88,14 @@ int    key_release_handler(int keycode, void *game_vars)
         vars->key_state[2] = 0;
     if (keycode == KEY_D)
         vars->key_state[3] = 0;
+    if (vars->key_state[0])
+        move_player(vars->player, vars->map->map, 'W');
+    if (vars->key_state[1])
+        move_player(vars->player, vars->map->map, 'A');
+    if (vars->key_state[2])
+        move_player(vars->player, vars->map->map, 'S');
+    if (vars->key_state[3])
+        move_player(vars->player, vars->map->map, 'D');
     return (0);
 }
 //initialize game vars
