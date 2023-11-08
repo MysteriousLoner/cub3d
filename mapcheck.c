@@ -3,7 +3,11 @@
 // assign path of graphic to struct if valid
 void add_nswe(char **dir, char *line)
 {
-    *dir = ft_substr(line, 3, ft_strlen(line) - 3);
+    // char    *tmp;
+    // tmp = ft_strdup(line);
+    // *tmp += 3;
+    // *dir = ft_strdup(tmp);
+    *dir = ft_substr(line, 3, ft_strlen(line) - 4);
     // *line ++;
     // printf("before: %s\n", line);
     // *line += 4;
@@ -30,6 +34,7 @@ int check_graphic(int fd, t_map *map)
             add_nswe(&map->EA, line);
         if (line[0] == 'W' && line[1] == 'E')
             add_nswe(&map->WE, line);
+        printf("line:%s\n", map->NO);
         free(line);
         i++;
     }

@@ -13,8 +13,7 @@ float	norm_angle(float angle)
 		angle -= (2 * PI);
 	return (angle);
 }
-
-void	check_horizontal(t_raycasting_vars *ray_vars, t_cub3d *vars, t_player *player)
+void	init_horizontal(t_raycasting_vars *ray_vars, t_cub3d *vars, t_player *player)
 {
 	ray_vars->dof = 0;
 	ray_vars->aTan = -1 / tan(ray_vars->ra);
@@ -38,7 +37,12 @@ void	check_horizontal(t_raycasting_vars *ray_vars, t_cub3d *vars, t_player *play
 		ray_vars->ry = player->y;
 		ray_vars->dof = longest_d(vars->map->map);
 	}
-	while (ray_vars->dof < longest_d(vars->map->map))
+}
+
+void	check_horizontal(t_raycasting_vars *ray_vars, t_cub3d *vars, t_player *player)
+{
+	init_horizontal(ray_vars, vars, player);
+	while (ray_vars->dof < 20)
 	{
 		ray_vars->mx = (int) ray_vars->rx >> 0;
 		ray_vars->my = (int) ray_vars->ry >> 0 ;
@@ -62,7 +66,7 @@ void	check_horizontal(t_raycasting_vars *ray_vars, t_cub3d *vars, t_player *play
 	}
 }
 
-void	check_vertical(t_raycasting_vars *ray_vars, t_cub3d *vars, t_player *player)
+void	init_vertical(t_raycasting_vars *ray_vars, t_cub3d *vars, t_player *player)
 {
 	ray_vars->dof = 0;
 	ray_vars->nTan = -1 * tan(ray_vars->ra);
@@ -86,7 +90,12 @@ void	check_vertical(t_raycasting_vars *ray_vars, t_cub3d *vars, t_player *player
 		ray_vars->ry = player->y;
 		ray_vars->dof = longest_d(vars->map->map);
 	}
-	while (ray_vars->dof < longest_d(vars->map->map))
+}
+
+void	check_vertical(t_raycasting_vars *ray_vars, t_cub3d *vars, t_player *player)
+{
+	init_vertical(ray_vars, vars, player);
+	while (ray_vars->dof < 20)
 	{
 		ray_vars->mx = (int) ray_vars->rx >> 0;
 		ray_vars->my = (int) ray_vars->ry >> 0 ;
@@ -110,6 +119,44 @@ void	check_vertical(t_raycasting_vars *ray_vars, t_cub3d *vars, t_player *player
 	}
 }
 
+void	init_rays(t_cub3d *vars, t_player *player, t_raycasting_vars *ray_vars)
+{
+		ray_vars->distH = 10000000000;
+		ray_vars->distV = 10000000000;
+		ray_vars->hx = player->x;
+		ray_vars->hy = player->y;
+		ray_vars->vx = player->x;
+		ray_vars->vy = player->y;
+}
+
+void	calculate_and_render_wall(t_cub3d *vars, t_player *player, t_raycasting_vars *ray_vars)
+{
+	if (ray_vars->distH < ray_vars->distV)
+	{
+		ray_vars->rx = ray_vars->hx;
+		ray_vars->ry = ray_vars->hy;
+		if (ray_vars->ra > PI)
+			ray_vars->dimg = vars->south;
+		if (ray_vars->ra < PI)
+			ray_vars->dimg = vars->north;
+		ray_vars->d = 'h';
+		draw_walls(vars, ray_vars->r, ray_vars->distH * cos(norm_angle(player->angle - ray_vars->ra)), ray_vars);
+	}
+	if (ray_vars->distV < ray_vars->distH)
+	{
+		ray_vars->rx = ray_vars->vx;
+		ray_vars->ry = ray_vars->vy;
+		if (ray_vars->ra > (PI / 2 ) && ray_vars->ra < (3 * PI / 2))
+			ray_vars->dimg = vars->west;
+		else if (ray_vars->ra < (PI / 2) || ray_vars->ra > (3 * PI / 2))
+			ray_vars->dimg = vars->east;
+		ray_vars->d = 'v';
+		draw_walls(vars, ray_vars->r, ray_vars->distV * cos(norm_angle(player->angle - ray_vars->ra)), ray_vars);
+	}
+	player->lov = ray_vars->ra;
+	draw_line_to_point(vars, ray_vars->rx, ray_vars->ry, player);
+}
+
 void	draw_rays(t_cub3d *vars, t_player *player)
 {
 	t_raycasting_vars *ray_vars;
@@ -118,40 +165,13 @@ void	draw_rays(t_cub3d *vars, t_player *player)
 	flag = 0;
 	ray_vars = malloc(sizeof(t_raycasting_vars));
 	ray_vars->ra = norm_angle(player->angle - DG * 30);
-	// ray_vars->ra = norm_angle(player->angle);
 	ray_vars->r = 0;
 	while (ray_vars->r < 400)
 	{
-		ray_vars->distH = 10000000000;
-		ray_vars->distV = 10000000000;
-		ray_vars->hx = player->x;
-		ray_vars->hy = player->y;
-		ray_vars->vx = player->x;
-		ray_vars->vy = player->y;
+		init_rays(vars, player, ray_vars);
 		check_horizontal(ray_vars, vars, player);
 		check_vertical(ray_vars, vars, player);
-		// printf("distH: %f, distV: %f\n", ray_vars->distH, ray_vars->distV);
-		if (ray_vars->distH < ray_vars->distV)
-		{
-			// printf("H smaller\n");
-			ray_vars->rx = ray_vars->hx;
-			ray_vars->ry = ray_vars->hy;
-			draw_walls(vars, ray_vars->r, ray_vars->distH * cos(norm_angle(player->angle - ray_vars->ra)));
-		}
-		if (ray_vars->distV < ray_vars->distH)
-		{
-			// printf("V smaller\n");
-			ray_vars->rx = ray_vars->vx;
-			ray_vars->ry = ray_vars->vy;
-			draw_walls(vars, ray_vars->r, ray_vars->distV * cos(norm_angle(player->angle - ray_vars->ra)));
-		}
-		if (ray_vars->distV == 10000000000 && ray_vars->distH == 10000000000)
-		{
-			// printf("long\n");
-			draw_walls(vars, ray_vars->r, longest_d(vars->map->map) * cos(norm_angle(player->angle - ray_vars->ra)));
-		}
-		player->lov = ray_vars->ra;
-		draw_line_to_point(vars, ray_vars->rx, ray_vars->ry, player);
+		calculate_and_render_wall(vars, player, ray_vars);
 		ray_vars->r++;
 		ray_vars->ra = norm_angle(ray_vars->ra + 1.0472 / 400);
 	}

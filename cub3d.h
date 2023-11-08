@@ -40,6 +40,17 @@
 
 char	*get_next_line(int fd);
 
+typedef struct s_image
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+}			t_image;
+
 typedef	struct s_raycasting_vars
 {
 	int		r;
@@ -61,6 +72,8 @@ typedef	struct s_raycasting_vars
 	float 	vx;
 	float 	vy;
 	float 	ca;
+	char	d;
+	t_image	*dimg;
 }		t_raycasting_vars;
 
 typedef struct s_rgb
@@ -96,16 +109,6 @@ typedef struct s_player
 	float	lov;
 }			t_player;
 
-typedef struct s_image
-{
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		line_length;
-	int		endian;
-	int		width;
-	int		height;
-}			t_image;
 
 typedef struct s_cub3d
 {
@@ -122,7 +125,7 @@ typedef struct s_cub3d
 	int			bsf;
 	int			key_state[4];
 	char		*mc_path;
-	t_image		*n;
+	t_image		*north;
 	t_image		*south;
 	t_image		*east;
 	t_image		*west;
@@ -144,7 +147,7 @@ void	for_real_engine(t_cub3d *vars);
 int		rgb_to_int(int r, int g, int b);
 void	render_player(t_cub3d *vars, int size, t_player *player);
 void	draw_line_to_point(t_cub3d *vars, float x, float y, t_player *player);
-void	draw_walls(t_cub3d *vars, int r, float dist);
+void	draw_walls(t_cub3d *vars, int r, float dist, t_raycasting_vars *ray_vars);
 // minimap
 void	init_minimap(int width, int height, t_cub3d *vars);
 // raycasting
