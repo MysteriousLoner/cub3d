@@ -1,42 +1,54 @@
-#ifndef CUB3D
-#define CUB3D
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yalee <yalee@student.42.fr.com>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/09 21:23:23 by yalee             #+#    #+#             */
+/*   Updated: 2023/11/09 21:24:03 by yalee            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef CUB3D_H
+# define CUB3D_H
 
 # include "libft/libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <math.h>
-#include <time.h>
-#include "mlx_linux/mlx.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <math.h>
+# include <time.h>
+# include "mlx_linux/mlx.h"
 
 // Macro for Linux
-#ifdef __linux__
-#define KEY_A 97
-#define KEY_S 115
-#define KEY_D 100
-#define KEY_W 119
-#define KEY_ESC 65307
-#define BUTTON_X 33
-#endif
+# ifdef __linux__
+#  define KEY_A 97
+#  define KEY_S 115
+#  define KEY_D 100
+#  define KEY_W 119
+#  define KEY_ESC 65307
+#  define BUTTON_X 33
+# endif
 
 // Macro for Mac
-#ifdef __APPLE__
-#define KEY_A 0
-#define KEY_S 1
-#define KEY_D 2
-#define KEY_W 13
-#define KEY_SPACE 49
-#define KEY_ESC 53
-#define BUTTON_X 17
-#endif
+# ifdef __APPLE__
+#  define KEY_A 0
+#  define KEY_S 1
+#  define KEY_D 2
+#  define KEY_W 13
+#  define KEY_SPACE 49
+#  define KEY_ESC 53
+#  define BUTTON_X 17
+# endif
 
 // Universal Macro
-#define PI 3.141592
-#define P2 1.570796
-#define P3 4.712388
-#define DG 0.017452
-#define WIDTH 1200
-#define HEIGHT 800
+# define PI 3.141592
+# define P2 1.570796
+# define P3 4.712388
+# define DG 0.017452
+# define WIDTH 1200
+# define HEIGHT 800
 
 char	*get_next_line(int fd);
 
