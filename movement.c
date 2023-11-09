@@ -1,17 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   movement.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yalee <yalee@student.42.fr.com>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/09 18:56:42 by yalee             #+#    #+#             */
+/*   Updated: 2023/11/09 18:56:59 by yalee            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-int		can_move(t_player *player, char **map, char sign)
+int	can_move(t_player *player, char **map, char sign)
 {
 	if (sign == '+')
 	{
-		if (map[(int)(player->y + player->dy)][(int)(player->x + player->dx)] == '1')
+		if (map[(int)(player->y + player->dy)][(int)(player->x + player->dx)]
+			== '1')
 		{
 			return (0);
 		}
 	}
 	if (sign == '-')
 	{
-		if (map[(int)(player->y - player->dy)][(int)(player->x - player->dx)] == '1')
+		if (map[(int)(player->y - player->dy)][(int)(player->x - player->dx)]
+			== '1')
 		{
 			return (0);
 		}

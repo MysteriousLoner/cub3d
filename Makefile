@@ -47,12 +47,20 @@ SRCS        :=      main.c \
                           libft/ft_memchr.c \
                           libft/ft_atoi.c \
                           libft/ft_split.c \
-                          mapcheck.c \
+                          parsing/mapcheck.c \
+                          parsing/map_check_utils.c \
+                          parsing/map_check_vassign.c \
+                          parsing/map_check2.c \
+                          parsing/map_check3.c \
                           movement.c \
+                          movement2.c \
                           debug.c \
                           gnl/get_next_line.c \
                           gnl/get_next_line_utils.c \
                           for_real_engine/for_real_engine.c \
+                          for_real_engine/engine_utils.c \
+                          for_real_engine/raycast_collision.c \
+                          for_real_engine/render_background.c \
                           for_real_engine/render_minimap.c \
                           for_real_engine/render_player.c \
                           for_real_engine/raycasting.c \

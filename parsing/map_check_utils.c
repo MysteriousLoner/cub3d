@@ -1,60 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   misc.c                                             :+:      :+:    :+:   */
+/*   map_check_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yalee <yalee@student.42.fr.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/09 18:56:14 by yalee             #+#    #+#             */
-/*   Updated: 2023/11/09 18:56:26 by yalee            ###   ########.fr       */
+/*   Created: 2023/11/09 17:42:25 by yalee             #+#    #+#             */
+/*   Updated: 2023/11/09 18:36:37 by yalee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-
-int	longest_row(char **map)
+#include "../cub3d.h"
+// free 2d array
+void	free_2d(char **arr)
 {
 	int	i;
-	int	j;
-	int	max;
 
 	i = 0;
-	j = 0;
-	max = 0;
-	while (map[i])
+	while (arr[i])
 	{
-		while (map[i][j])
-			j++;
-		if (j > max)
-			max = j;
-		j = 0;
+		free(arr[i]);
 		i++;
 	}
-	return (max - 2);
+	free(arr);
 }
 
-int	map_height(char **map)
+// duplicate a 2d array
+char	**dup_2d(char **arr)
 {
-	int	i;
+	int		i;
+	char	**dup;
 
 	i = 0;
-	while (map[i])
+	while (arr[i])
 		i++;
-	return (i - 1);
-}
-
-int	longest_d(char **map)
-{
-	int	max;
-	int	i;
-
+	dup = malloc(sizeof(char *) * (i + 1));
+	dup[i] = 0;
 	i = 0;
-	max = map_height(map);
-	while (map[i])
+	while (arr[i])
 	{
-		if ((int)ft_strlen(map[i]) - 1 > max)
-			max = ft_strlen(map[i]) - 1;
+		dup[i] = ft_strdup(arr[i]);
 		i++;
 	}
-	return (max);
+	return (dup);
 }

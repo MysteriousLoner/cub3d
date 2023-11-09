@@ -1,10 +1,16 @@
-#include "../cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_minimap.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yalee <yalee@student.42.fr.com>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/09 18:25:10 by yalee             #+#    #+#             */
+/*   Updated: 2023/11/09 18:25:11 by yalee            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// render the minimap based on the arguements given
-// mlx pointer and window pointer are given in the t_cub3d struct, access by calling 
-// vars->mlx and vars->win
-// width and height are the dimensions of the minimap
-// get player coordinates from t_player struct, access by calling vars->player->x and vars->player->y
+#include "../cub3d.h"
 
 int	get_map_size(char **map, int width, int height)
 {
@@ -75,7 +81,7 @@ void	minimap_put_floor(int size, t_cub3d *vars, int pos_x, int pos_y)
 	}
 }
 
-void	init_minimap(int width, int height, t_cub3d *vars)
+void	render_minimap(int width, int height, t_cub3d *vars)
 {
 	int	i;
 	int	j;
