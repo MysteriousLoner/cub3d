@@ -6,7 +6,7 @@
 /*   By: yalee <yalee@student.42.fr.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 18:05:56 by yalee             #+#    #+#             */
-/*   Updated: 2023/11/09 19:15:40 by yalee            ###   ########.fr       */
+/*   Updated: 2023/11/11 00:51:39 by yalee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ char	*roll(void)
 
 	roll = (rand() % 5) + 1;
 	if (roll == 1)
-		return (ft_strdup("Bitchyo better start strippin'beforeI make you!\n"));
+		return (("Beachyo better start strippin'beforeI make you!\n"));
 	if (roll == 2)
-		return (ft_strdup("Nigga you wan some of these?\n"));
+		return (("你嘎 you wan some of these?\n"));
 	if (roll == 3)
-		return (ft_strdup("NIGGA yo better be cappin'!\n"));
+		return (("腻个 yo better be cappin'!\n"));
 	if (roll == 4)
-		return (ft_strdup("Yo NIGGA we have a problem here?\n"));
+		return (("Yo 妮尬 we have a problem here?\n"));
 	if (roll == 5)
-		return (ft_strdup("NIGGA yiu wanna fuck with  me? \n"));
+		return (("泥佳 yiu wanna 法克 with  me? \n"));
 	else
-		return (ft_strdup("Me speechless yo\n"));
+		return (("Me speechless yo\n"));
 }
 
 // key_handler
@@ -49,12 +49,14 @@ void	space(t_cub3d *vars)
 {
 	if (ft_strncmp(vars->mc_path, "mc/mc2.xpm", 10) == 0)
 	{
+		free(vars->mc_path);
 		vars->mc_path = ft_strdup("mc/mc.xpm");
 		vars->bs = roll();
 		vars->bsf = 1;
 	}
-	else
+	else if (ft_strncmp(vars->mc_path, "mc/mc.xpm", 9) == 0)
 	{
+		free(vars->mc_path);
 		vars->mc_path = ft_strdup("mc/mc2.xpm");
 		vars->bsf = 0;
 	}

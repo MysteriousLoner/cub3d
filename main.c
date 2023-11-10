@@ -6,7 +6,7 @@
 /*   By: yalee <yalee@student.42.fr.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 17:30:49 by yalee             #+#    #+#             */
-/*   Updated: 2023/11/09 18:55:57 by yalee            ###   ########.fr       */
+/*   Updated: 2023/11/11 00:49:16 by yalee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,24 @@
 #include <stdlib.h>
 
 // close_window
+	// free(game_vars->mc);
+	// free(game_vars->screen);
+	// free(game_vars->player);
+	// free(game_vars->north);
+	// free(game_vars->south);
+	// free(game_vars->west);
+	// free(game_vars->east);
+	// free(game_vars->map->no);
+	// free(game_vars->map->so);
+	// free(game_vars->map->ea);
+	// free(game_vars->map->we);
+	// free(game_vars->map->f);
+	// free(game_vars->map->c);
+	// free_2d(game_vars->map->map);
 int	close_window(t_cub3d *game_vars)
 {
 	mlx_destroy_window(game_vars->mlx, game_vars->win);
+	system("leaks cub3d");
 	exit(0);
 }
 

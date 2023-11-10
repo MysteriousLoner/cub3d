@@ -3,16 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   mapcheck.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cyu-xian <cyu-xian@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yalee <yalee@student.42.fr.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 17:13:48 by yalee             #+#    #+#             */
-/*   Updated: 2023/11/10 13:57:08 by cyu-xian         ###   ########.fr       */
+/*   Updated: 2023/11/11 00:57:58 by yalee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
 // check if the directory of NO SO EA WE is valid
+int	cheese_g(char *line)
+{
+	if (line[0] == '\n')
+	{
+		free(line);
+		return (1);
+	}
+	return (0);
+}
+
 int	check_graphic(int fd, t_map *map)
 {
 	char	*line;
@@ -22,7 +32,7 @@ int	check_graphic(int fd, t_map *map)
 	while (i < 4)
 	{
 		line = get_next_line(fd);
-		if (line[0] == '\n')
+		if (cheese_g(line))
 			break ;
 		if (line[0] == 'N' && line[1] == 'O')
 			add_nswe(&map->no, line);
@@ -38,32 +48,6 @@ int	check_graphic(int fd, t_map *map)
 	if (map->no == NULL || map->so == NULL
 		|| map->ea == NULL || map->we == NULL)
 		return (0);
-	return (1);
-}
-
-// get rgb value from the map and assign it to struct
-int	check_colour(int fd, t_map *map)
-{
-	char	*line;
-
-	line = get_next_line(fd);
-	while (line[0] == '\n')
-	{
-		free(line);
-		line = get_next_line(fd);
-	}
-	if (line[0] == 'F' && line[1] == ' ')
-		add_rgb(map, 'F', line);
-	free(line);
-	line = get_next_line(fd);
-	if (line[0] == 'C' && line[1] == ' ')
-		add_rgb(map, 'C', line);
-	free(line);
-	if (map->floor == NULL || map->ceiling == NULL)
-	{
-		printf("COLOUR FORMAT ERROR!\n");
-		return (0);
-	}
 	return (1);
 }
 

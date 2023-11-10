@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cyu-xian <cyu-xian@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yalee <yalee@student.42.fr.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 21:23:23 by yalee             #+#    #+#             */
-/*   Updated: 2023/11/10 14:09:37 by cyu-xian         ###   ########.fr       */
+/*   Updated: 2023/11/11 00:21:01 by yalee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ typedef struct s_player
 	float	dx;
 	float	dy;
 	float	angle;
-	float	*view;
 	float	c_pos;
 	float	rc_angle;
 	float	lov;
@@ -214,4 +213,7 @@ void	move_player(t_player *player, char **map, char key);
 int		longest_row(char **map);
 int		map_height(char **map);
 int		longest_d(char **map);
+
+// garbage collector
+void	free_game_vars(t_cub3d *game_vars);
 #endif

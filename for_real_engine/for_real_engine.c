@@ -6,7 +6,7 @@
 /*   By: yalee <yalee@student.42.fr.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 17:37:52 by yalee             #+#    #+#             */
-/*   Updated: 2023/11/09 18:12:46 by yalee            ###   ########.fr       */
+/*   Updated: 2023/11/11 00:48:37 by yalee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,8 @@ void	init_mc(t_cub3d *vars)
 	vars->mc = (t_image *)malloc(sizeof(t_image));
 	vars->mc->img = mlx_xpm_file_to_image(vars->mlx, vars->mc_path,
 			&vars->mc->width, &vars->mc->height);
-	if (vars->mc->img)
-		vars->mc->addr = mlx_get_data_addr(vars->mc->img, &vars->mc->bpp,
-				&vars->mc->line_length, &vars->mc->endian);
+	vars->mc->addr = mlx_get_data_addr(vars->mc->img, &vars->mc->bpp,
+			&vars->mc->line_length, &vars->mc->endian);
 }
 
 void	init_graphics(t_cub3d *vars)
@@ -64,6 +63,7 @@ void	init_graphics(t_cub3d *vars)
 
 void	for_real_engine(t_cub3d *vars)
 {
+	free(vars->mc);
 	init_mc(vars);
 	render_sky(vars);
 	render_earth(vars);

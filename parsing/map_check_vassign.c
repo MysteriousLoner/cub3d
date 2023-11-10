@@ -6,7 +6,7 @@
 /*   By: yalee <yalee@student.42.fr.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 17:45:44 by yalee             #+#    #+#             */
-/*   Updated: 2023/11/09 18:39:13 by yalee            ###   ########.fr       */
+/*   Updated: 2023/11/11 00:23:13 by yalee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	add_rgb(t_map *map, char c, char *line)
 		map->ceiling->g = ft_atoi(rgb[1]);
 		map->ceiling->b = ft_atoi(rgb[2]);
 	}
+	free_2d(rgb);
 }
 
 // assign variables to player struct

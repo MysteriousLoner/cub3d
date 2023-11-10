@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cyu-xian <cyu-xian@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yalee <yalee@student.42.fr.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 17:37:59 by yalee             #+#    #+#             */
-/*   Updated: 2023/11/10 23:39:57 by cyu-xian         ###   ########.fr       */
+/*   Updated: 2023/11/11 00:06:37 by yalee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,5 @@ void	render_walls(t_cub3d *vars, t_player *player)
 		ray_vars->r++;
 		ray_vars->ra = norm_angle(ray_vars->ra + 1.0472 / 600);
 	}
+	free(ray_vars);
 }
