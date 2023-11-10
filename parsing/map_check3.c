@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_check3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yalee <yalee@student.42.fr.com>            +#+  +:+       +#+        */
+/*   By: cyu-xian <cyu-xian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 18:47:45 by yalee             #+#    #+#             */
-/*   Updated: 2023/11/09 18:48:03 by yalee            ###   ########.fr       */
+/*   Updated: 2023/11/10 13:42:06 by cyu-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int	map_check(char *argv, t_cub3d *vars)
 	int	fd;
 
 	vars->map = (t_map *)malloc(sizeof(t_map));
-	vars->map->NO = NULL;
-	vars->map->SO = NULL;
-	vars->map->EA = NULL;
-	vars->map->WE = NULL;
+	vars->map->no = NULL;
+	vars->map->so = NULL;
+	vars->map->ea = NULL;
+	vars->map->we = NULL;
 	fd = open(argv, O_RDONLY);
 	if (!check_graphic(fd, vars->map))
 		return (0);

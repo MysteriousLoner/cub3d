@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_walls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yalee <yalee@student.42.fr.com>            +#+  +:+       +#+        */
+/*   By: cyu-xian <cyu-xian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 17:30:20 by yalee             #+#    #+#             */
-/*   Updated: 2023/11/09 19:12:16 by yalee            ###   ########.fr       */
+/*   Updated: 2023/11/10 13:59:04 by cyu-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	compute_colour(t_cub3d *vars, int y, float dist,
 	return (color);
 }
 
-void	drawWalls(t_cub3d *vars, int r, float dist,
+void	drawwalls(t_cub3d *vars, int r, float dist,
 	t_raycasting_vars *ray_vars)
 {
 	int		x;

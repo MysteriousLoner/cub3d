@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_collision.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yalee <yalee@student.42.fr.com>            +#+  +:+       +#+        */
+/*   By: cyu-xian <cyu-xian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 17:39:44 by yalee             #+#    #+#             */
-/*   Updated: 2023/11/09 18:19:51 by yalee            ###   ########.fr       */
+/*   Updated: 2023/11/10 14:07:23 by cyu-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,20 @@ void	init_horizontal(t_raycasting_vars *ray_vars, t_cub3d *vars,
 	t_player *player)
 {
 	ray_vars->dof = 0;
-	ray_vars->aTan = -1 / tan(ray_vars->ra);
+	ray_vars->atan = -1 / tan(ray_vars->ra);
 	if (ray_vars->ra > PI)
 	{
 		ray_vars->ry = (int) player->y - 0.0001;
-		ray_vars->rx = (player->y - ray_vars->ry) * ray_vars->aTan + player->x;
+		ray_vars->rx = (player->y - ray_vars->ry) * ray_vars->atan + player->x;
 		ray_vars->yo = -1;
-		ray_vars->xo = -ray_vars->yo * ray_vars->aTan;
+		ray_vars->xo = -ray_vars->yo * ray_vars->atan;
 	}
 	if (ray_vars->ra < PI)
 	{
 		ray_vars->ry = (int)player->y + 1;
-		ray_vars->rx = (player->y - ray_vars->ry) * ray_vars->aTan + player->x;
+		ray_vars->rx = (player->y - ray_vars->ry) * ray_vars->atan + player->x;
 		ray_vars->yo = 1;
-		ray_vars->xo = -ray_vars->yo * ray_vars->aTan;
+		ray_vars->xo = -ray_vars->yo * ray_vars->atan;
 	}
 	if (ray_vars->ra == 0 || ray_vars->ra == PI)
 	{
@@ -56,7 +56,7 @@ void	check_horizontal(t_raycasting_vars *rv, t_cub3d *vars,
 		{
 			rv->hx = rv->rx;
 			rv->hy = rv->ry;
-			rv->distH = dist(player->x, player->y, rv->hx, rv->hy);
+			rv->disth = dist(player->x, player->y, rv->hx, rv->hy);
 			rv->dof = longest_d(vars->map->map);
 		}
 		else
@@ -72,20 +72,20 @@ void	init_vertical(t_raycasting_vars *ray_vars, t_cub3d *vars,
 	t_player *player)
 {
 	ray_vars->dof = 0;
-	ray_vars->nTan = -1 * tan(ray_vars->ra);
+	ray_vars->ntan = -1 * tan(ray_vars->ra);
 	if (ray_vars->ra > (PI / 2) && ray_vars->ra < (3 * PI / 2))
 	{
 		ray_vars->rx = (int) player->x - 0.0001;
-		ray_vars->ry = (player->x - ray_vars->rx) * ray_vars->nTan + player->y;
+		ray_vars->ry = (player->x - ray_vars->rx) * ray_vars->ntan + player->y;
 		ray_vars->xo = -1;
-		ray_vars->yo = -ray_vars->xo * ray_vars->nTan;
+		ray_vars->yo = -ray_vars->xo * ray_vars->ntan;
 	}
 	if (ray_vars->ra < (PI / 2) || ray_vars->ra > (3 * PI / 2))
 	{
 		ray_vars->rx = (int)player->x + 1;
-		ray_vars->ry = (player->x - ray_vars->rx) * ray_vars->nTan + player->y;
+		ray_vars->ry = (player->x - ray_vars->rx) * ray_vars->ntan + player->y;
 		ray_vars->xo = 1;
-		ray_vars->yo = -ray_vars->xo * ray_vars->nTan;
+		ray_vars->yo = -ray_vars->xo * ray_vars->ntan;
 	}
 	if (ray_vars->ra == PI / 2 || ray_vars->ra == 3 * PI / 2)
 	{
@@ -113,7 +113,7 @@ void	check_vertical(t_raycasting_vars *rv, t_cub3d *vars,
 		{
 			rv->vx = rv->rx;
 			rv->vy = rv->ry;
-			rv->distV = dist(player->x, player->y, rv->vx, rv->vy);
+			rv->distv = dist(player->x, player->y, rv->vx, rv->vy);
 			rv->dof = longest_d(vars->map->map);
 		}
 		else

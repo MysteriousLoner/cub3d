@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yalee <yalee@student.42.fr.com>            +#+  +:+       +#+        */
+/*   By: cyu-xian <cyu-xian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 17:37:59 by yalee             #+#    #+#             */
-/*   Updated: 2023/11/09 18:24:01 by yalee            ###   ########.fr       */
+/*   Updated: 2023/11/10 14:07:38 by cyu-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	init_rays(t_cub3d *vars, t_player *player, t_raycasting_vars *ray_vars)
 {
-		ray_vars->distH = 10000000000;
-		ray_vars->distV = 10000000000;
+		ray_vars->disth = 10000000000;
+		ray_vars->distv = 10000000000;
 		ray_vars->hx = player->x;
 		ray_vars->hy = player->y;
 		ray_vars->vx = player->x;
@@ -25,7 +25,7 @@ void	init_rays(t_cub3d *vars, t_player *player, t_raycasting_vars *ray_vars)
 void	calculate_and_render_wall(t_cub3d *v, t_player *p,
 	t_raycasting_vars *rv)
 {
-	if (rv->distH < rv->distV)
+	if (rv->disth < rv->distv)
 	{
 		rv->rx = rv->hx;
 		rv->ry = rv->hy;
@@ -34,9 +34,9 @@ void	calculate_and_render_wall(t_cub3d *v, t_player *p,
 		if (rv->ra < PI)
 			rv->dimg = v->north;
 		rv->d = 'h';
-		drawWalls(v, rv->r, rv->distH * cos(norm_angle(p->angle - rv->ra)), rv);
+		drawwalls(v, rv->r, rv->disth * cos(norm_angle(p->angle - rv->ra)), rv);
 	}
-	if (rv->distV < rv->distH)
+	if (rv->distv < rv->disth)
 	{
 		rv->rx = rv->vx;
 		rv->ry = rv->vy;
@@ -45,7 +45,7 @@ void	calculate_and_render_wall(t_cub3d *v, t_player *p,
 		else if (rv->ra < (PI / 2) || rv->ra > (3 * PI / 2))
 			rv->dimg = v->east;
 		rv->d = 'v';
-		drawWalls(v, rv->r, rv->distV * cos(norm_angle(p->angle - rv->ra)), rv);
+		drawwalls(v, rv->r, rv->distv * cos(norm_angle(p->angle - rv->ra)), rv);
 	}
 	p->lov = rv->ra;
 	draw_line_to_point(v, rv->rx, rv->ry, p);

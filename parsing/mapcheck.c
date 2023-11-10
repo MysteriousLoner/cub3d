@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapcheck.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yalee <yalee@student.42.fr.com>            +#+  +:+       +#+        */
+/*   By: cyu-xian <cyu-xian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 17:13:48 by yalee             #+#    #+#             */
-/*   Updated: 2023/11/09 18:50:08 by yalee            ###   ########.fr       */
+/*   Updated: 2023/11/10 13:57:08 by cyu-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,18 @@ int	check_graphic(int fd, t_map *map)
 		if (line[0] == '\n')
 			break ;
 		if (line[0] == 'N' && line[1] == 'O')
-			add_nswe(&map->NO, line);
+			add_nswe(&map->no, line);
 		if (line[0] == 'S' && line[1] == 'O')
-			add_nswe(&map->SO, line);
+			add_nswe(&map->so, line);
 		if (line[0] == 'E' && line[1] == 'A')
-			add_nswe(&map->EA, line);
+			add_nswe(&map->ea, line);
 		if (line[0] == 'W' && line[1] == 'E')
-			add_nswe(&map->WE, line);
+			add_nswe(&map->we, line);
 		free(line);
 		i++;
 	}
-	if (map->NO == NULL || map->SO == NULL
-		|| map->EA == NULL || map->WE == NULL)
+	if (map->no == NULL || map->so == NULL
+		|| map->ea == NULL || map->we == NULL)
 		return (0);
 	return (1);
 }
