@@ -6,7 +6,7 @@
 /*   By: cyu-xian <cyu-xian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 17:37:59 by yalee             #+#    #+#             */
-/*   Updated: 2023/11/10 14:07:38 by cyu-xian         ###   ########.fr       */
+/*   Updated: 2023/11/10 23:39:57 by cyu-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ void	render_walls(t_cub3d *vars, t_player *player)
 	ray_vars = malloc(sizeof(t_raycasting_vars));
 	ray_vars->ra = norm_angle(player->angle - DG * 30);
 	ray_vars->r = 0;
-	while (ray_vars->r < 400)
+	while (ray_vars->r < 600)
 	{
 		init_rays(vars, player, ray_vars);
 		check_horizontal(ray_vars, vars, player);
 		check_vertical(ray_vars, vars, player);
 		calculate_and_render_wall(vars, player, ray_vars);
 		ray_vars->r++;
-		ray_vars->ra = norm_angle(ray_vars->ra + 1.0472 / 400);
+		ray_vars->ra = norm_angle(ray_vars->ra + 1.0472 / 600);
 	}
 }
