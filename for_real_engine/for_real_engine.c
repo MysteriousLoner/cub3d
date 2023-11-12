@@ -6,7 +6,7 @@
 /*   By: yalee <yalee@student.42.fr.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 17:37:52 by yalee             #+#    #+#             */
-/*   Updated: 2023/11/11 00:48:37 by yalee            ###   ########.fr       */
+/*   Updated: 2023/11/11 02:50:18 by yalee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ void	for_real_engine(t_cub3d *vars)
 	init_mc(vars);
 	render_sky(vars);
 	render_earth(vars);
-	render_walls(vars, vars->player);
 	render_minimap(vars->width * 0.40, vars->height * 0.40, vars);
 	render_player(vars, vars->size, vars->player);
+	render_walls(vars, vars->player);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->screen->img, 0, 0);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->mc->img, vars->width
 		* 0.30, vars->height - 400);

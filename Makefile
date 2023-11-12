@@ -71,7 +71,7 @@ SRCS        :=      main.c \
 OBJS        := $(SRCS:.c=.o)
 
 .c.o:
-	${CC} ${FLAGS} -c $< -o ${<:.c=.o}
+	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 CLR_RMV		:= \033[0m
 RED		    := \033[1;31m

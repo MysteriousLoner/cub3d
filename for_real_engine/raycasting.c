@@ -6,7 +6,7 @@
 /*   By: yalee <yalee@student.42.fr.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 17:37:59 by yalee             #+#    #+#             */
-/*   Updated: 2023/11/11 00:06:37 by yalee            ###   ########.fr       */
+/*   Updated: 2023/11/11 02:51:59 by yalee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	init_rays(t_cub3d *vars, t_player *player, t_raycasting_vars *ray_vars)
 		ray_vars->hy = player->y;
 		ray_vars->vx = player->x;
 		ray_vars->vy = player->y;
+		(void)vars;
 }
 
 void	calculate_and_render_wall(t_cub3d *v, t_player *p,

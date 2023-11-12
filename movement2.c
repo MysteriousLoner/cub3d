@@ -6,7 +6,7 @@
 /*   By: yalee <yalee@student.42.fr.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 18:05:56 by yalee             #+#    #+#             */
-/*   Updated: 2023/11/11 00:51:39 by yalee            ###   ########.fr       */
+/*   Updated: 2023/11/11 02:39:44 by yalee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	player_action(t_cub3d *vars, int keycode)
 		move_player(vars->player, vars->map->map, 'S');
 	if (vars->key_state[3])
 		move_player(vars->player, vars->map->map, 'D');
+	(void)keycode;
 }
 
 void	space(t_cub3d *vars)
